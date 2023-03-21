@@ -6,6 +6,7 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import MobileRegister from "./screens/MobileRegister";
 import MobileVerification from "./screens/MobileVerification";
+import DocumentsFirstPage from "./screens/DocumentsFirstPage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -14,7 +15,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="DocumentsFirstPage"
           screenOptions={{
             headerShown: false,
           }}
@@ -25,6 +26,10 @@ export default function App() {
           <Stack.Screen
             name="MobileVerification"
             component={MobileVerification}
+          />
+          <Stack.Screen
+            name="DocumentsFirstPage"
+            component={DocumentsFirstPage}
           />
         </Stack.Navigator>
       </NavigationContainer>

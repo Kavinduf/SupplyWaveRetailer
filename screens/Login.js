@@ -81,10 +81,6 @@ export default function Login({ navigation }) {
           />
         </View>
 
-        {/* Otp Input Field start */}
-
-        {/* Otp Input Field end */}
-
         {/* Text below button */}
 
         <View style={{ flexDirection: "row", marginTop: 40 }}>

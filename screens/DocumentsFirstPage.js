@@ -6,7 +6,7 @@ import { Icon } from "@rneui/themed";
 import { color } from "@rneui/base";
 import { KeyboardAvoidingView } from "react-native";
 
-export default function MobileVerification({ navigation }) {
+export default function DocumentsFirstPage({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       {/* header section start */}
@@ -14,58 +14,35 @@ export default function MobileVerification({ navigation }) {
       <Text onPress={() => navigation.navigate("MobileRegister")}>Back</Text>
       <View style={{ alignItems: "center" }}>
         <Text style={{ fontSize: 25, fontWeight: "bold", marginTop: 70 }}>
-          Verify Mobile Number
+          Enter A Photo Of Your
+        </Text>
+        <Text style={{ fontSize: 25, fontWeight: "bold", marginTop: 5 }}>
+          Documents
         </Text>
         <Text style={{ color: "#737373", marginTop: 15 }}>
-          We senr a verification code to
+          Please make sure the details are
         </Text>
-        <Text style={{ color: "#000000", marginTop: 5, fontWeight: "bold" }}>
-          0763622407
-        </Text>
-        <Text style={{ color: "#737373", marginTop: 5 }}>
-          Enter the Code below
-        </Text>
+        <Text style={{ color: "#737373", marginTop: 5 }}>clearly visible</Text>
 
         {/* header section end */}
 
         {/* Image start */}
 
         <Image
-          source={require("../assets/MobileVerification-image.png")}
+          source={require("../assets/DocumentsFirstPage-image.png")}
           style={{
             width: 240,
             height: 240,
-            marginTop: 20,
+            marginTop: 40,
           }}
         />
         {/* Image  end */}
-
-        {/* otp input field start */}
-
-        <Input
-          textContentType="telephoneNumber"
-          maxLength="10"
-          textAlign="center"
-          selectionColor="#2A8B00"
-          keyboardType="phone-pad"
-          placeholder="OTP Here CHANGE THE  BOTTOM BORDER"
-          style={{
-            marginTop: 20,
-            fontSize: 15,
-            borderColor: "#000000",
-            borderWidth: 2,
-            borderBottomWidth: 2,
-            borderRadius: 7,
-          }}
-        />
-
-        {/* otp input field end */}
 
         {/* button start*/}
 
         <View
           style={{
-            marginTop: 20,
+            marginTop: 80,
             marginEnd: 10,
             marginStart: 10,
           }}
@@ -74,29 +51,13 @@ export default function MobileVerification({ navigation }) {
             color={"#BDE4B8"}
             radius={7}
             raised
-            title={"VERIFY & CONTINUE"}
+            title={"CONTINUE"}
             titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
             buttonStyle={{ height: 50 }}
           />
         </View>
 
         {/* button end*/}
-
-        {/* Resend Code start */}
-        <View style={{ flexDirection: "row", marginTop: 40 }}>
-          <Text style={{ alignSelf: "center" }}>Didnt Receive Code?</Text>
-          <Text
-            style={{
-              fontWeight: "bold",
-              color: "#2A8B00",
-              marginStart: 10,
-            }}
-          >
-            Resend Code
-          </Text>
-        </View>
-
-        {/* Resend code end */}
       </View>
     </SafeAreaView>
   );
