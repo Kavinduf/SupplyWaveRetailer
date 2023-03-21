@@ -4,6 +4,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
+import MobileRegister from "./screens/MobileRegister";
+import MobileVerification from "./screens/MobileVerification";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -19,6 +21,11 @@ export default function App() {
         >
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="MobileRegister" component={MobileRegister} />
+          <Stack.Screen
+            name="MobileVerification"
+            component={MobileVerification}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     );
