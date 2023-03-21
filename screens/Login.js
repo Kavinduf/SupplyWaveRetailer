@@ -26,6 +26,8 @@ export default function Login({ navigation }) {
         <Text style={styles.LableAlign}>Phone Number</Text>
         <View style={{ flexDirection: "row" }}>
           <Input
+            textContentType="telephoneNumber"
+            selectionColor="#2A8B00"
             keyboardType="phone-pad"
             placeholder="0761234567"
             rightIcon={{
@@ -33,12 +35,15 @@ export default function Login({ navigation }) {
               name: "check",
               size: "18",
             }}
+            style={{ fontSize: 15 }}
           />
         </View>
 
         <Text style={styles.LableAlign}>Password</Text>
         <View style={{ flexDirection: "row" }}>
           <Input
+            textContentType="password"
+            selectionColor="#2A8B00"
             placeholder="••••••••••"
             secureTextEntry={true}
             rightIcon={{
@@ -46,6 +51,7 @@ export default function Login({ navigation }) {
               name: "eye-off",
               size: "18",
             }}
+            style={{ fontSize: 15 }}
           />
         </View>
 
@@ -67,16 +73,17 @@ export default function Login({ navigation }) {
         <View style={{ marginTop: 10, marginEnd: 10, marginStart: 10 }}>
           <Button
             color={"#BDE4B8"}
-            radius={5}
+            radius={7}
             raised
             title={"SIGN IN"}
             titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
             buttonStyle={{ height: 50 }}
-          ></Button>
-          {/* <Button onPress={() => navigation.navigate("Register")}>
-          Go to register
-        </Button> */}
+          />
         </View>
+
+        {/* Otp Input Field start */}
+
+        {/* Otp Input Field end */}
 
         {/* Text below button */}
 
@@ -85,6 +92,7 @@ export default function Login({ navigation }) {
             Don't Have Account?
           </Text>
           <Text
+            onPress={() => navigation.navigate("Register")}
             style={{
               marginLeft: 115,
               fontWeight: "bold",
