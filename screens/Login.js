@@ -1,15 +1,24 @@
-import React, { Component } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import {
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { Button, Input } from "@rneui/themed";
 import { Image } from "@rneui/themed";
-import { Icon } from "@rneui/themed";
-import { color } from "@rneui/base";
+
 import { KeyboardAvoidingView } from "react-native";
+import GreenButton from "../Components/GreenButton";
 
 export default function Login({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <View style={{ alignItems: "center" }}>
           <Image
             source={require("../assets/login-png.png")}
@@ -33,7 +42,7 @@ export default function Login({ navigation }) {
             rightIcon={{
               type: "feather",
               name: "check",
-              size: "18",
+              size: 18,
             }}
             style={{ fontSize: 15 }}
           />
@@ -49,7 +58,7 @@ export default function Login({ navigation }) {
             rightIcon={{
               type: "feather",
               name: "eye-off",
-              size: "18",
+              size: 18,
             }}
             style={{ fontSize: 15 }}
           />
@@ -71,13 +80,11 @@ export default function Login({ navigation }) {
         {/* button */}
 
         <View style={{ marginTop: 10, marginEnd: 10, marginStart: 10 }}>
-          <Button
-            color={"#BDE4B8"}
-            radius={7}
-            raised
+          <GreenButton
+            onClick={() => {
+              navigation.navigate("Register");
+            }}
             title={"SIGN IN"}
-            titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
-            buttonStyle={{ height: 50 }}
           />
         </View>
 

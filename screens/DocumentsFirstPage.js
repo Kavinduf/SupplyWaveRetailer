@@ -5,6 +5,7 @@ import { Image } from "@rneui/themed";
 import { Icon } from "@rneui/themed";
 import { color } from "@rneui/base";
 import { KeyboardAvoidingView } from "react-native";
+import GreenButton from "../Components/GreenButton";
 
 export default function DocumentsFirstPage({ navigation }) {
   return (
@@ -47,13 +48,11 @@ export default function DocumentsFirstPage({ navigation }) {
             marginStart: 10,
           }}
         >
-          <Button
-            color={"#BDE4B8"}
-            radius={7}
-            raised
+          <GreenButton
+            onClick={() => {
+              navigation.navigate("Register");
+            }}
             title={"CONTINUE"}
-            titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
-            buttonStyle={{ height: 50 }}
           />
         </View>
 

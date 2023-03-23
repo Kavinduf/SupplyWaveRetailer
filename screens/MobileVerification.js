@@ -5,6 +5,7 @@ import { Image } from "@rneui/themed";
 import { Icon } from "@rneui/themed";
 import { color } from "@rneui/base";
 import { KeyboardAvoidingView } from "react-native";
+import GreenButton from "../Components/GreenButton";
 
 export default function MobileVerification({ navigation }) {
   return (
@@ -44,7 +45,7 @@ export default function MobileVerification({ navigation }) {
 
         <Input
           textContentType="telephoneNumber"
-          maxLength="10"
+          maxLength={10}
           textAlign="center"
           selectionColor="#2A8B00"
           keyboardType="phone-pad"
@@ -70,13 +71,11 @@ export default function MobileVerification({ navigation }) {
             marginStart: 10,
           }}
         >
-          <Button
-            color={"#BDE4B8"}
-            radius={7}
-            raised
+          <GreenButton
+            onClick={() => {
+              navigation.navigate("Register");
+            }}
             title={"VERIFY & CONTINUE"}
-            titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
-            buttonStyle={{ height: 50 }}
           />
         </View>
 
