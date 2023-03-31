@@ -11,7 +11,9 @@ export default function MobileRegister({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       {/* header section start */}
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <Text onPress={() => navigation.navigate("Register")}>Back</Text>
         <View style={{ alignItems: "center" }}>
           <Text style={{ fontSize: 25, fontWeight: "bold", marginTop: 70 }}>

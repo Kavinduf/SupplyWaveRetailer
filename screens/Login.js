@@ -82,7 +82,7 @@ export default function Login({ navigation }) {
         <View style={{ marginTop: 10, marginEnd: 10, marginStart: 10 }}>
           <GreenButton
             onClick={() => {
-              navigation.navigate("Register");
+              navigation.navigate("HomeRetailer");
             }}
             title={"SIGN IN"}
           />

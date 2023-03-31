@@ -24,7 +24,13 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
-          <Stack.Screen name="HomeRetailer" component={HomeRetailer} />
+          <Stack.Screen
+            name="HomeRetailer"
+            component={HomeRetailer}
+            options={{
+              headerShown: true,
+            }}
+          />
           <Stack.Screen
             name="MobileVerification"
             component={MobileVerification}
