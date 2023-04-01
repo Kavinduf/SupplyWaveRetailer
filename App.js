@@ -8,6 +8,8 @@ import MobileRegister from "./screens/MobileRegister";
 import MobileVerification from "./screens/MobileVerification";
 import DocumentsFirstPage from "./screens/DocumentsFirstPage";
 import HomeRetailer from "./screens/HomeRetailer";
+import EnterDetailsRetailer from "./screens/EnterDetailsRetailer";
+import HomeRetailerDrawer from "./screens/HomeRetailerDrawer";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -16,7 +18,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="HomeRetailer"
           screenOptions={{
             headerShown: false,
           }}
@@ -31,6 +33,7 @@ export default function App() {
               headerShown: true,
             }}
           />
+
           <Stack.Screen
             name="MobileVerification"
             component={MobileVerification}
@@ -38,6 +41,10 @@ export default function App() {
           <Stack.Screen
             name="DocumentsFirstPage"
             component={DocumentsFirstPage}
+          />
+          <Stack.Screen
+            name="EnterDetailsRetailer"
+            component={EnterDetailsRetailer}
           />
         </Stack.Navigator>
       </NavigationContainer>

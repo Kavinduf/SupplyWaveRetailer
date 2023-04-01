@@ -22,7 +22,7 @@ export default function MobileVerification({ navigation }) {
             Verify Mobile Number
           </Text>
           <Text style={{ color: "#737373", marginTop: 15 }}>
-            We senr a verification code to
+            We send a verification code to
           </Text>
           <Text style={{ color: "#000000", marginTop: 5, fontWeight: "bold" }}>
             0763622407
@@ -77,7 +77,7 @@ export default function MobileVerification({ navigation }) {
           >
             <GreenButton
               onClick={() => {
-                navigation.navigate("Register");
+                navigation.navigate("EnterDetailsRetailer");
               }}
               title={"VERIFY & CONTINUE"}
             />

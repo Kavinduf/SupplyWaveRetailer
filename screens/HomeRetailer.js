@@ -79,13 +79,26 @@ const HomeRetailer = () => {
 
       {/* Searchbar End */}
 
-      <View style={{ flexDirection: "row" }}>
-        <Card wrapperStyle={styles.cardContainer}>
+      <View
+        style={{
+          flexDirection: "row",
+          // justifyContent: "space-between",
+          gap: 0,
+          paddingHorizontal: 10,
+        }}
+      >
+        <Card
+          containerStyle={styles.cardContainer}
+          wrapperStyle={styles.cardWrapperContainer}
+        >
           <Icon name="tag" type="font-awesome" color="#2A8B00" size={15} />
           <Text style={{ fontWeight: "bold" }}>Brands</Text>
         </Card>
 
-        <Card wrapperStyle={styles.cardContainer}>
+        <Card
+          containerStyle={styles.cardContainer}
+          wrapperStyle={styles.cardWrapperContainer}
+        >
           <Icon name="filter" type="font-awesome" color="#2A8B00" size={15} />
           <Text style={{ fontWeight: "bold" }}>Filter</Text>
         </Card>
@@ -134,9 +147,13 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: StatusBar.currentHeight || 30,
   },
-  cardContainer: {
+  cardWrapperContainer: {
     flexDirection: "row",
     gap: 4,
-    width: "100%",
+    justifyContent: "center",
+  },
+  cardContainer: {
+    width: "50%",
+    marginHorizontal: 0,
   },
 });
