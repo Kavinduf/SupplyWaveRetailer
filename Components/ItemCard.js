@@ -5,7 +5,10 @@ import { Icon } from "@rneui/base";
 
 const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
   return (
-    <Card wrapperStyle={styles.container}>
+    <Card
+      wrapperStyle={styles.container}
+      containerStyle={{ backgroundColor: "#EEEEEE", borderRadius: 10 }}
+    >
       {/* {registerPage && <Text>Register Page true</Text>} */}
 
       <Image
@@ -46,6 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     gap: 20,
+    backgroundColor: "#EEEEEE",
   },
   textContainer: {
     alignContent: "center",

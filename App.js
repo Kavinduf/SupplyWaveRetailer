@@ -10,6 +10,7 @@ import DocumentsFirstPage from "./screens/DocumentsFirstPage";
 import HomeRetailer from "./screens/HomeRetailer";
 import EnterDetailsRetailer from "./screens/EnterDetailsRetailer";
 import HomeRetailerDrawer from "./screens/HomeRetailerDrawer";
+import ItemDetails from "./screens/ItemDetails";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -18,7 +19,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="HomeRetailer"
+          initialRouteName="HomeRetailer.js"
           screenOptions={{
             headerShown: false,
           }}
@@ -26,6 +27,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
+          <Stack.Screen name="ItemDetails" component={ItemDetails} />
           <Stack.Screen
             name="HomeRetailer"
             component={HomeRetailer}
