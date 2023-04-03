@@ -32,37 +32,44 @@ const ItemDetails = () => {
         />
       </View>
       <View style={styles.viewText}>
-        <Text style={styles.textTitle}>Maliban Crackers 100g(12Pc)</Text>
+        <Text style={styles.textTitle}>Maliban Crackers Cream 100g (12Pc)</Text>
         <Text style={styles.textPrice}>LKR 1500.00</Text>
+
+        {/* The single item weight which is "100g" and pieces in a pack which is "12" in this case must be taken seprately when inserting items by manufacturer so that the single item weight and pieaces count can be displayed beside the item name */}
       </View>
       <View style={styles.viewText}>
         <Text style={styles.textSubtitle}>Description</Text>
         <ItemDescription
           titleLeft={"Pieces in a Package"}
-          titleRight={"12 Pieces"}
+          titleRight={"12 Pc"}
         />
         <ItemDescription titleLeft={"Brand"} titleRight={"Maliban"} />
         <ItemDescription titleLeft={"Weight"} titleRight={"2 KG"} />
         <ItemDescription titleLeft={"Dimentions"} titleRight={"21x16cm"} />
       </View>
+
       <View style={styles.separator}>
         <View style={styles.row}>
           <AntDesign
             name="minuscircleo"
             size={35}
-            color={"#2A8B00"}
+            color={"black"}
             onPress={onMinus}
           />
           <Text style={styles.quantity}>{quantity}</Text>
           <AntDesign
             name="pluscircleo"
             size={35}
-            color={"#2A8B00"}
+            color={"black"}
             onPress={onPlus}
           />
         </View>
+      </View>
+      <View style={styles.viewButton}>
         <View style={styles.button}>
-          <Text>Add {quantity} to basket</Text>
+          <Text style={styles.buttonText}>
+            Add {quantity} to basket - LKR 1500
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -82,7 +89,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   viewText: {
-    marginTop: 10,
+    marginTop: 5,
     backgroundColor: "#FFF",
     // marginHorizontal: 10,
     // alignItems: "flex-start",
@@ -94,30 +101,23 @@ const styles = StyleSheet.create({
     height: "50%",
   },
   textTitle: {
-    fontSize: 25,
+    fontSize: 21,
     fontWeight: "bold",
     letterSpacing: 0.5,
   },
   textSubtitle: {
-    fontSize: 20,
-    fontWeight: "800",
+    fontSize: 18,
+    fontWeight: "bold",
     marginBottom: 15,
     letterSpacing: 0.5,
   },
   textPrice: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
     letterSpacing: 0.5,
-  },
-  textDetails: {
-    fontSize: 18,
-    color: "gray",
-    fontWeight: "500",
-    letterSpacing: 0.5,
-    marginBottom: 10,
+    marginTop: 5,
   },
   separator: {
-    backgroundColor: "lightgrey",
     marginTop: 5,
     backgroundColor: "#FFF",
     padding: 10,
@@ -131,11 +131,29 @@ const styles = StyleSheet.create({
     width: 150,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 5,
   },
   quantity: {
     fontSize: 20,
     fontWeight: "bold",
     marginHorizontal: 20,
   },
-  button: {},
+  viewButton: {
+    backgroundColor: "#FFF",
+    paddingBottom: 50,
+    // alignItems: "center",
+  },
+  button: {
+    backgroundColor: "#BDE4B8",
+    marginTop: 5,
+    alignItems: "center",
+    padding: 15,
+    borderRadius: 10,
+    marginHorizontal: 10,
+  },
+  buttonText: {
+    color: "black",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
 });
