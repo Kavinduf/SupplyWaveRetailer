@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,17 +8,29 @@ import {
   Image,
 } from "react-native";
 import React from "react";
+import { Button } from "@rneui/themed";
 import ItemDescription from "../Components/ItemDescription";
+import { AntDesign } from "@expo/vector-icons";
 
 const ItemDetails = () => {
+  const [quantity, setQuantity] = useState(1);
+  const onMinus = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+  const onPlus = () => {
+    setQuantity(quantity + 1);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.viewImage}>
+      <View style={styles.viewImage}>
         <Image
           source={require("../assets/login-png.png")}
           style={styles.image}
         />
-      </View> */}
+      </View>
       <View style={styles.viewText}>
         <Text style={styles.textTitle}>Maliban Crackers 100g(12Pc)</Text>
         <Text style={styles.textPrice}>LKR 1500.00</Text>
@@ -32,6 +45,26 @@ const ItemDetails = () => {
         <ItemDescription titleLeft={"Weight"} titleRight={"2 KG"} />
         <ItemDescription titleLeft={"Dimentions"} titleRight={"21x16cm"} />
       </View>
+      <View style={styles.separator}>
+        <View style={styles.row}>
+          <AntDesign
+            name="minuscircleo"
+            size={35}
+            color={"#2A8B00"}
+            onPress={onMinus}
+          />
+          <Text style={styles.quantity}>{quantity}</Text>
+          <AntDesign
+            name="pluscircleo"
+            size={35}
+            color={"#2A8B00"}
+            onPress={onPlus}
+          />
+        </View>
+        <View style={styles.button}>
+          <Text>Add {quantity} to basket</Text>
+        </View>
+      </View>
     </SafeAreaView>
   );
 };
@@ -43,6 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: StatusBar.currentHeight || 30,
     backgroundColor: "#EEE",
+    justifyContent: "center",
   },
   viewImage: {
     alignItems: "center",
@@ -56,8 +90,8 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   image: {
-    width: "70%",
-    height: "70%",
+    width: "50%",
+    height: "50%",
   },
   textTitle: {
     fontSize: 25,
@@ -82,4 +116,26 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     marginBottom: 10,
   },
+  separator: {
+    backgroundColor: "lightgrey",
+    marginTop: 5,
+    backgroundColor: "#FFF",
+    padding: 10,
+    alignItems: "center",
+  },
+  row: {
+    flexDirection: "row",
+    backgroundColor: "#EEEEEE",
+    borderRadius: 40,
+    padding: 10,
+    width: 150,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  quantity: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginHorizontal: 20,
+  },
+  button: {},
 });
