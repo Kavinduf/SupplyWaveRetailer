@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Button, Card, Image } from "@rneui/themed";
 import { Icon } from "@rneui/base";
+import { Feather } from "@expo/vector-icons";
 
 const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
   return (
@@ -20,7 +21,6 @@ const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
       />
       <View style={styles.textContainer}>
         <Text>{title}</Text>
-
         <Text>{Description}</Text>
         <Text>{Brand}</Text>
         <Text>{price} LKR</Text>
@@ -32,9 +32,9 @@ const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
           title={"Add to cart"}
         /> */}
       </View>
-      <Icon
+      <Feather
         style={styles.iconContainer}
-        name="cart-plus"
+        name="shopping-cart"
         type="font-awesome"
         color="#2A8B00"
         size={24}

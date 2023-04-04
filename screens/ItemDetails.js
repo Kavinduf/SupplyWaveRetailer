@@ -68,7 +68,7 @@ const ItemDetails = () => {
       <View style={styles.viewButton}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>
-            Add {quantity} to basket - LKR 1500
+            Add {quantity} to basket &#8226; LKR 1500
           </Text>
         </View>
       </View>
@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#EEEEEE",
     borderRadius: 40,
     padding: 10,
-    width: 150,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 5,

@@ -20,7 +20,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="ItemDetails"
+          initialRouteName="ShoppingCart"
           screenOptions={{
             headerShown: false,
           }}
@@ -28,8 +28,19 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
-          <Stack.Screen name="ItemDetails" component={ItemDetails} />
-          <Stack.Screen name="ShoppingCart" component={ShoppingCart} />
+          <Stack.Screen
+            name="ItemDetails"
+            component={ItemDetails}
+            options={{ presentation: "modal" }}
+          />
+          <Stack.Screen
+            name="ShoppingCart"
+            component={ShoppingCart}
+            options={{
+              headerShown: true,
+              title: "Shopping Cart",
+            }}
+          />
           <Stack.Screen
             name="HomeRetailer"
             component={HomeRetailer}
