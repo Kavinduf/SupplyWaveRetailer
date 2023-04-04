@@ -6,10 +6,10 @@ import {
   SafeAreaView,
   FlatList,
 } from "react-native";
+import { color, Icon, SearchBar, Button, Card, Image } from "@rneui/base";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 import ItemCard from "../Components/ItemCard";
-import { color, Icon, SearchBar } from "@rneui/base";
-import { Button, Card, Image } from "@rneui/themed";
 
 const HomeRetailer = () => {
   const [search, setSearch] = useState("");
@@ -30,7 +30,7 @@ const HomeRetailer = () => {
           inputStyle={styles.searchInput}
           inputContainerStyle={styles.searchInputContainer}
           returnKeyType="search"
-          style={{ backgroundColor: "#EEEEEE" }}
+          style={{ backgroundColor: "#FFF" }}
           searchIcon={{ color: "#2A8B00", size: 25 }}
         ></SearchBar>
 
@@ -48,7 +48,7 @@ const HomeRetailer = () => {
             containerStyle={styles.cardContainer}
             wrapperStyle={styles.cardWrapperContainer}
           >
-            <Icon name="tag" type="font-awesome" color="#2A8B00" size={15} />
+            <AntDesign name="tag" color="#2A8B00" size={15} />
             <Text style={{ fontWeight: "bold" }}>Brands</Text>
           </Card>
 
@@ -56,7 +56,7 @@ const HomeRetailer = () => {
             containerStyle={styles.cardContainer}
             wrapperStyle={styles.cardWrapperContainer}
           >
-            <Icon name="filter" type="font-awesome" color="#2A8B00" size={15} />
+            <FontAwesome name="filter" color="#2A8B00" size={15} />
             <Text style={{ fontWeight: "bold" }}>Filter</Text>
           </Card>
         </View>
@@ -103,8 +103,8 @@ export default HomeRetailer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 30,
-    backgroundColor: "#fff",
+    marginTop: StatusBar.currentHeight || 10,
+    // backgroundColor: "#EEE",
   },
   cardWrapperContainer: {
     flexDirection: "row",
@@ -122,9 +122,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     // color: "#FFFFFF",
   },
-  searchInput: { backgroundColor: "#EEE", borderRadius: 30, padding: 0 },
+  searchInput: { backgroundColor: "#FFF", borderRadius: 30, padding: 0 },
   searchInputContainer: {
-    backgroundColor: "#EEE",
+    backgroundColor: "#FFF",
     borderRadius: 30,
     paddingStart: 5,
   },

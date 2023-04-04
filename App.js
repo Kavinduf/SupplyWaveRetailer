@@ -20,7 +20,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="ShoppingCart"
+          initialRouteName="HomeRetailer"
           screenOptions={{
             headerShown: false,
           }}

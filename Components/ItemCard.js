@@ -8,7 +8,7 @@ const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
   return (
     <Card
       wrapperStyle={styles.container}
-      containerStyle={{ backgroundColor: "#EEEEEE", borderRadius: 10 }}
+      containerStyle={{ backgroundColor: "#FFF", borderRadius: 10 }}
     >
       {/* {registerPage && <Text>Register Page true</Text>} */}
 
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     gap: 20,
-    backgroundColor: "#EEEEEE",
+    backgroundColor: "#FFF",
   },
   textContainer: {
     alignContent: "center",
