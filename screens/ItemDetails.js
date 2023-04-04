@@ -97,8 +97,9 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   image: {
-    width: "50%",
-    height: "50%",
+    width: 300,
+    height: 330,
+    // alignSelf: "center",
   },
   textTitle: {
     fontSize: 21,

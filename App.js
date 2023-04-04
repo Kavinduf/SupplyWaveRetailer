@@ -11,6 +11,7 @@ import HomeRetailer from "./screens/HomeRetailer";
 import EnterDetailsRetailer from "./screens/EnterDetailsRetailer";
 import HomeRetailerDrawer from "./screens/HomeRetailerDrawer";
 import ItemDetails from "./screens/ItemDetails";
+import ShoppingCart from "./screens/ShoppingCart";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -28,6 +29,7 @@ export default function App() {
           <Stack.Screen name="Register" component={Register} />
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
           <Stack.Screen name="ItemDetails" component={ItemDetails} />
+          <Stack.Screen name="ShoppingCart" component={ShoppingCart} />
           <Stack.Screen
             name="HomeRetailer"
             component={HomeRetailer}
