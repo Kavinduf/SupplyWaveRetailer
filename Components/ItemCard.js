@@ -4,7 +4,7 @@ import { Button, Card, Image } from "@rneui/themed";
 import { Icon } from "@rneui/base";
 import { Feather } from "@expo/vector-icons";
 
-const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
+const ItemCard = ({ title, price, brand, registerPage, pieces }) => {
   return (
     <Card
       wrapperStyle={styles.container}
@@ -20,11 +20,28 @@ const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
         }}
       />
       <View style={styles.textContainer}>
-        <Text>{title}</Text>
-        <Text>{Description}</Text>
-        <Text>{Brand}</Text>
-        <Text>{price} LKR</Text>
-
+        <Text style={styles.textTitle}>{title}</Text>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.textDescriptionLeft}>Pieces :</Text>
+          <Text style={styles.textDescriptionRight}>{pieces}</Text>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={styles.textDescriptionLeft}>Brand :</Text>
+          <Text style={styles.textDescriptionRight}>{brand}</Text>
+        </View>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View style={{ justifyContent: "flex-end" }}>
+            <Text style={styles.textPrice}>LKR {price}</Text>
+          </View>
+          <View style={{ justifyContent: "flex-end" }}>
+            <Feather
+              name="shopping-cart"
+              type="font-awesome"
+              color="#2A8B00"
+              size={20}
+            />
+          </View>
+        </View>
         {/* <Button
           containerStyle={{
             marginTop: 10,
@@ -32,13 +49,6 @@ const ItemCard = ({ title, price, Brand, registerPage, Description }) => {
           title={"Add to cart"}
         /> */}
       </View>
-      <Feather
-        style={styles.iconContainer}
-        name="shopping-cart"
-        type="font-awesome"
-        color="#2A8B00"
-        size={24}
-      />
     </Card>
   );
 };
@@ -48,15 +58,31 @@ export default ItemCard;
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    gap: 20,
     backgroundColor: "#FFF",
+    justifyContent: "space-between",
   },
   textContainer: {
-    alignContent: "center",
     justifyContent: "center",
+    width: 205,
   },
-  iconContainer: {
-    flexDirection: "row",
-    marginStart: 80,
+  textTitle: {
+    fontWeight: "600",
+    fontSize: 14,
+  },
+  textDescriptionLeft: {
+    fontWeight: "400",
+    paddingStart: 1,
+    fontSize: 13,
+  },
+  textDescriptionRight: {
+    fontWeight: "500",
+    color: "gray",
+    paddingStart: 5,
+    fontSize: 13,
+  },
+  textPrice: {
+    fontSize: 15,
+    fontWeight: "600",
+    marginTop: 10,
   },
 });

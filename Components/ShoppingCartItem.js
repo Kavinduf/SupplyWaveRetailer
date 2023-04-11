@@ -94,7 +94,7 @@ export default ShoppingCartItem;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#FFF",
-    marginTop: 2,
+    marginBottom: 2,
     paddingBottom: 10,
   },
   viewImage: {

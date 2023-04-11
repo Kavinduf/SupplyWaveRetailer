@@ -36,7 +36,7 @@ const HomeRetailer = () => {
 
         {/* Searchbar End */}
 
-        <View
+        {/* <View
           style={{
             flexDirection: "row",
             // justifyContent: "space-between",
@@ -59,36 +59,36 @@ const HomeRetailer = () => {
             <FontAwesome name="filter" color="#2A8B00" size={15} />
             <Text style={{ fontWeight: "bold" }}>Filter</Text>
           </Card>
-        </View>
+        </View> */}
 
         {/* Item Cards Start */}
 
         <View>
           <ItemCard
-            title={"Title"}
-            price={200}
-            Brand={"Brand"}
-            Description={"Description"}
+            title={"Maliban Cream Crackers 100g (12Pc)"}
+            price={1500}
+            brand={"Maliban Pvt Ltd"}
+            pieces={12}
             registerPage={true}
           />
           <ItemCard
-            title={"Title"}
-            price={200}
-            Brand={"Brand"}
-            Description={"Description"}
+            title={"Maliban Cream Crackers 100g (12Pc)"}
+            price={1500}
+            brand={"Maliban Pvt Ltd"}
+            pieces={12}
           />
           <ItemCard
-            title={"Title"}
-            price={200}
-            Brand={"Brand"}
-            Description={"Description"}
+            title={"Maliban Cream Crackers 100g (12Pc)"}
+            price={1500}
+            brand={"Maliban Pvt Ltd"}
+            pieces={12}
             registerPage={true}
           />
           <ItemCard
-            title={"Title"}
-            price={200}
-            Brand={"Brand"}
-            Description={"Description"}
+            title={"Maliban Cream Crackers 100g (12Pc)"}
+            price={1500}
+            brand={"Maliban Pvt Ltd"}
+            pieces={12}
           />
         </View>
 
