@@ -6,39 +6,20 @@ import {
   Button,
   Card,
   Image,
-  Tab,
   TabView,
 } from "@rneui/base";
 import React, { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CatergoryCard from "../Components/CategoryCard";
 
-const CatergoriesRetailer = () => {
+// tab Categories start
+
+function Categories() {
   const [search, setSearch] = useState("");
-  const [index, setIndex] = React.useState(0);
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ marginHorizontal: 20 }}>
-        {/* Tab start */}
-
-        <View style={{ marginTop: 10 }}>
-          <Tab
-            containerStyle={{ backgroundColor: "#F5F5F5" }}
-            value={index}
-            onChange={(e) => setIndex(e)}
-            indicatorStyle={styles.indicator}
-            variant="primary"
-          >
-            <Tab.Item title="Catergories" titleStyle={styles.tabTitle} />
-            <Tab.Item title="Brands" titleStyle={styles.tabTitle} />
-          </Tab>
-          <TabView value={index} onChange={setIndex} animationType="spring">
-            <TabView.Item style={{ backgroundColor: "red", width: "100%" }}>
-              <Text h1>Recent</Text>
-            </TabView.Item>
-          </TabView>
-        </View>
-
-        {/* Tab end */}
         {/* searchbar start */}
 
         <View>
@@ -105,9 +86,34 @@ const CatergoriesRetailer = () => {
       </View>
     </SafeAreaView>
   );
+}
+
+// tab Categories end
+
+//   Tab Brands start
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
+
+//   Tab Brands end
+
+const Tab = createMaterialTopTabNavigator();
+
+const BrowseRetailer = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Categories" component={Categories} />
+      <Tab.Screen name="Settings" component={SettingsScreen} />
+    </Tab.Navigator>
+  );
 };
 
-export default CatergoriesRetailer;
+export default BrowseRetailer;
 
 const styles = StyleSheet.create({
   container: {
