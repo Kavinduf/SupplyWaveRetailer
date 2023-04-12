@@ -6,10 +6,7 @@ import { Feather } from "@expo/vector-icons";
 
 const ItemCard = ({ title, price, brand, registerPage, pieces }) => {
   return (
-    <Card
-      wrapperStyle={styles.container}
-      containerStyle={{ backgroundColor: "#FFF", borderRadius: 10 }}
-    >
+    <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.container}>
       {/* {registerPage && <Text>Register Page true</Text>} */}
 
       <Image
@@ -57,6 +54,19 @@ export default ItemCard;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 1,
+    marginBottom: 0,
+  },
+  cardWrapper: {
     flexDirection: "row",
     backgroundColor: "#FFF",
     justifyContent: "space-between",

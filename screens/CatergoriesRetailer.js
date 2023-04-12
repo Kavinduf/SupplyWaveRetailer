@@ -18,27 +18,6 @@ const CatergoriesRetailer = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={{ marginHorizontal: 20 }}>
-        {/* searchbar start */}
-
-        <View>
-          <SearchBar
-            lightTheme="true"
-            round="true"
-            value={search}
-            onChangeText={setSearch}
-            placeholder="Browse our products"
-            selectionColor="#2A8B00"
-            // leftIconContainerStyle={{ backgroundColor: "#FFFFFF" }}
-            containerStyle={styles.searchContainer}
-            inputStyle={styles.searchInput}
-            inputContainerStyle={styles.searchInputContainer}
-            returnKeyType="search"
-            style={{ backgroundColor: "#FFF" }}
-            searchIcon={{ color: "#2A8B00", size: 25 }}
-          ></SearchBar>
-        </View>
-
-        {/* SearchBar end */}
         {/* Tab start */}
 
         <View style={{ marginTop: 10 }}>
@@ -60,9 +39,68 @@ const CatergoriesRetailer = () => {
         </View>
 
         {/* Tab end */}
+        {/* searchbar start */}
 
         <View>
-          <CatergoryCard></CatergoryCard>
+          <SearchBar
+            lightTheme="true"
+            round="true"
+            value={search}
+            onChangeText={setSearch}
+            placeholder="Search brands"
+            selectionColor="#2A8B00"
+            // leftIconContainerStyle={{ backgroundColor: "#FFFFFF" }}
+            containerStyle={styles.searchContainer}
+            inputStyle={styles.searchInput}
+            inputContainerStyle={styles.searchInputContainer}
+            returnKeyType="search"
+            style={{ backgroundColor: "#FFF" }}
+            searchIcon={{ color: "#2A8B00", size: 25 }}
+          ></SearchBar>
+        </View>
+
+        {/* SearchBar end */}
+
+        <View
+          style={{
+            marginTop: 20,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        >
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
+          <CatergoryCard
+            image={require("../assets/login-png.png")}
+            title={"Buiscuits"}
+          />
         </View>
       </View>
     </SafeAreaView>
@@ -81,6 +119,14 @@ const styles = StyleSheet.create({
     padding: 0,
     borderRadius: 30,
     marginTop: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 1,
     // color: "#FFFFFF",
   },
   searchInput: { backgroundColor: "#FFF", borderRadius: 30, padding: 0 },

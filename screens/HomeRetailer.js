@@ -8,93 +8,67 @@ import {
 } from "react-native";
 import { color, Icon, SearchBar, Button, Card, Image } from "@rneui/base";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useState, TouchableOpacity } from "react";
 import ItemCard from "../Components/ItemCard";
 
 const HomeRetailer = () => {
   const [search, setSearch] = useState("");
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        {/* SearchBAr Start */}
+    <SafeAreaView style={styles.container}>
+      {/* SearchBAr Start */}
 
-        <SearchBar
-          lightTheme="true"
-          round="true"
-          value={search}
-          onChangeText={setSearch}
-          placeholder="Browse our products"
-          selectionColor="#2A8B00"
-          // leftIconContainerStyle={{ backgroundColor: "#FFFFFF" }}
-          containerStyle={styles.searchContainer}
-          inputStyle={styles.searchInput}
-          inputContainerStyle={styles.searchInputContainer}
-          returnKeyType="search"
-          style={{ backgroundColor: "#FFF" }}
-          searchIcon={{ color: "#2A8B00", size: 25 }}
-        ></SearchBar>
+      <SearchBar
+        lightTheme="true"
+        round="true"
+        value={search}
+        onChangeText={setSearch}
+        placeholder="Browse our products"
+        selectionColor="#2A8B00"
+        // leftIconContainerStyle={{ backgroundColor: "#FFFFFF" }}
+        containerStyle={styles.searchContainer}
+        inputStyle={styles.searchInput}
+        inputContainerStyle={styles.searchInputContainer}
+        returnKeyType="search"
+        style={{ backgroundColor: "#FFF" }}
+        searchIcon={{ color: "#2A8B00", size: 25 }}
+        rightIcon={{}}
+      ></SearchBar>
 
-        {/* Searchbar End */}
+      {/* Searchbar End */}
 
-        {/* <View
-          style={{
-            flexDirection: "row",
-            // justifyContent: "space-between",
-            gap: 0,
-            paddingHorizontal: 10,
-          }}
-        >
-          <Card
-            containerStyle={styles.cardContainer}
-            wrapperStyle={styles.cardWrapperContainer}
-          >
-            <AntDesign name="tag" color="#2A8B00" size={15} />
-            <Text style={{ fontWeight: "bold" }}>Brands</Text>
-          </Card>
+      {/* Item Cards Start */}
 
-          <Card
-            containerStyle={styles.cardContainer}
-            wrapperStyle={styles.cardWrapperContainer}
-          >
-            <FontAwesome name="filter" color="#2A8B00" size={15} />
-            <Text style={{ fontWeight: "bold" }}>Filter</Text>
-          </Card>
-        </View> */}
+      <View>
+        <ItemCard
+          title={"Maliban Cream Crackers 100g (12Pc)"}
+          price={1500}
+          brand={"Maliban Pvt Ltd"}
+          pieces={12}
+          registerPage={true}
+        />
+        <ItemCard
+          title={"Maliban Cream Crackers 100g (12Pc)"}
+          price={1500}
+          brand={"Maliban Pvt Ltd"}
+          pieces={12}
+        />
+        <ItemCard
+          title={"Maliban Cream Crackers 100g (12Pc)"}
+          price={1500}
+          brand={"Maliban Pvt Ltd"}
+          pieces={12}
+          registerPage={true}
+        />
+        <ItemCard
+          title={"Maliban Cream Crackers 100g (12Pc)"}
+          price={1500}
+          brand={"Maliban Pvt Ltd"}
+          pieces={12}
+        />
+      </View>
 
-        {/* Item Cards Start */}
-
-        <View>
-          <ItemCard
-            title={"Maliban Cream Crackers 100g (12Pc)"}
-            price={1500}
-            brand={"Maliban Pvt Ltd"}
-            pieces={12}
-            registerPage={true}
-          />
-          <ItemCard
-            title={"Maliban Cream Crackers 100g (12Pc)"}
-            price={1500}
-            brand={"Maliban Pvt Ltd"}
-            pieces={12}
-          />
-          <ItemCard
-            title={"Maliban Cream Crackers 100g (12Pc)"}
-            price={1500}
-            brand={"Maliban Pvt Ltd"}
-            pieces={12}
-            registerPage={true}
-          />
-          <ItemCard
-            title={"Maliban Cream Crackers 100g (12Pc)"}
-            price={1500}
-            brand={"Maliban Pvt Ltd"}
-            pieces={12}
-          />
-        </View>
-
-        {/* Item cards End */}
-      </SafeAreaView>
-    </View>
+      {/* Item cards End */}
+    </SafeAreaView>
   );
 };
 
@@ -104,7 +78,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 10,
-    // backgroundColor: "#EEE",
+    // marginHorizontal: 10,
+    backgroundColor: "#F5F5F5",
   },
   cardWrapperContainer: {
     flexDirection: "row",
@@ -119,7 +94,15 @@ const styles = StyleSheet.create({
     padding: 0,
     borderRadius: 30,
     marginTop: 0,
-    marginHorizontal: 10,
+    marginHorizontal: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 1,
     // color: "#FFFFFF",
   },
   searchInput: { backgroundColor: "#FFF", borderRadius: 30, padding: 0 },
