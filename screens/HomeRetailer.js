@@ -7,7 +7,7 @@ import {
   FlatList,
 } from "react-native";
 import { color, Icon, SearchBar, Button, Card, Image } from "@rneui/base";
-import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import React, { useState, TouchableOpacity } from "react";
 import ItemCard from "../Components/ItemCard";
 
@@ -16,6 +16,40 @@ const HomeRetailer = () => {
   return (
     <SafeAreaView style={styles.container}>
       {/* SearchBAr Start */}
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginHorizontal: 20,
+          marginBottom: 20,
+        }}
+      >
+        <View>
+          <Text style={styles.text}>Deliver To</Text>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <View>
+              <Text>Shop1</Text>
+            </View>
+            <View style={{ alignSelf: "center" }}>
+              <AntDesign name="down" size={14} color="black" />
+            </View>
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            backgroundColor: "black",
+            borderRadius: 20,
+            padding: 8,
+            gap: 8,
+          }}
+        >
+          <FontAwesome5 name="clipboard-list" size={15} color="#FFF" />
+          <Text style={styles.text}>Orders</Text>
+        </View>
+      </View>
 
       <SearchBar
         lightTheme="true"
@@ -110,5 +144,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     borderRadius: 30,
     paddingStart: 5,
+  },
+  text: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "gray",
   },
 });

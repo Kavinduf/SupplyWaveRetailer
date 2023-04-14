@@ -15,10 +15,18 @@ import CatergoryCard from "../Components/CategoryCard";
 
 // tab Categories start
 
-function Categories() {
+function CategoriesScreen() {
+  return <Text>uefb</Text>;
+}
+
+// tab Categories end
+
+//   Tab Brands start
+
+function BrandsScreen() {
   const [search, setSearch] = useState("");
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={{ marginHorizontal: 20 }}>
         {/* searchbar start */}
 
@@ -84,18 +92,6 @@ function Categories() {
           />
         </View>
       </View>
-    </SafeAreaView>
-  );
-}
-
-// tab Categories end
-
-//   Tab Brands start
-
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Settings!</Text>
     </View>
   );
 }
@@ -106,10 +102,29 @@ const Tab = createMaterialTopTabNavigator();
 
 const BrowseRetailer = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Categories" component={Categories} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
+    <SafeAreaView style={styles.container}>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarLabelStyle: {
+            fontSize: 19,
+            color: "black",
+            fontWeight: "700",
+            textTransform: "capitalize",
+          },
+          tabBarStyle: { backgroundColor: "#F5F5F5" },
+          tabBarIndicatorStyle: {
+            backgroundColor: "#2A8B00",
+            height: 3,
+            width: 120,
+            marginLeft: 35,
+            borderRadius: 50,
+          },
+        }}
+      >
+        <Tab.Screen name="Categories" component={CategoriesScreen} />
+        <Tab.Screen name="Brands" component={BrandsScreen} />
+      </Tab.Navigator>
+    </SafeAreaView>
   );
 };
 
@@ -118,7 +133,7 @@ export default BrowseRetailer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 10,
+    marginTop: StatusBar.currentHeight || 0,
     backgroundColor: "#F5F5F5",
   },
   searchContainer: {
