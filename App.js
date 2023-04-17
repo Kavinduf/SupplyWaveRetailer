@@ -21,7 +21,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="HomeRetailer"
+          initialRouteName="BrowseRetailer"
           screenOptions={{
             headerShown: false,
           }}

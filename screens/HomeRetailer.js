@@ -30,7 +30,7 @@ const HomeRetailer = () => {
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <View>
-              <Text>Shop1</Text>
+              <Text style={{ fontWeight: "500" }}>Shop1</Text>
             </View>
             <View style={{ alignSelf: "center" }}>
               <AntDesign name="down" size={14} color="black" />
@@ -69,7 +69,15 @@ const HomeRetailer = () => {
       ></SearchBar>
 
       {/* Searchbar End */}
-
+      <View>
+        <View style={{ flexDirection: "row" }}>
+          <Text>Brands</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text>All</Text>
+            <AntDesign name="right" size={15} color="black" />
+          </View>
+        </View>
+      </View>
       {/* Item Cards Start */}
 
       <View>
