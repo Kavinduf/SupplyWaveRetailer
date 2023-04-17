@@ -10,13 +10,130 @@ import {
 } from "@rneui/base";
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import DropDownPicker from "react-native-dropdown-picker";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CatergoryCard from "../Components/CategoryCard";
 
 // tab Categories start
 
 function CategoriesScreen() {
-  return <Text>uefb</Text>;
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
+  ]);
+  return (
+    <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Beverages"
+        categorySelectable={true}
+        dropDownContainerStyle={{
+          backgroundColor: "#FFF",
+          marginTop: 10,
+        }}
+        // listParentContainerStyle={{
+        //   borderColor: "#FFF",
+        // }}
+        // listChildContainerStyle={{
+        //   borderColor: "#FFF",
+        // }}
+        // listParentLabelStyle={{
+        //   fontWeight: "bold",
+        //   fontSize: 15,
+        // }}
+        // listChildLabelStyle={{
+        //   fontWeight: "300",
+        // }}
+      />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Buiscuits"
+        categorySelectable={true}
+        dropDownContainerStyle={{
+          backgroundColor: "#FFF",
+          marginTop: 10,
+        }}
+      />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Buiscuits"
+        categorySelectable={true}
+        dropDownContainerStyle={{
+          backgroundColor: "#FFF",
+          marginTop: 10,
+        }}
+      />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Buiscuits"
+        categorySelectable={true}
+        dropDownContainerStyle={{
+          backgroundColor: "#FFF",
+          marginTop: 10,
+        }}
+      />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Buiscuits"
+        categorySelectable={true}
+        dropDownContainerStyle={{
+          backgroundColor: "#FFF",
+          marginTop: 10,
+        }}
+      />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Buiscuits"
+        categorySelectable={true}
+        dropDownContainerStyle={{
+          backgroundColor: "#FFF",
+          marginTop: 10,
+        }}
+      />
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
+        placeholder="Buiscuits"
+        categorySelectable={true}
+      />
+    </View>
+  );
 }
 
 // tab Categories end
