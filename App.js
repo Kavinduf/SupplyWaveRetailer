@@ -25,7 +25,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="HomeRetailer"
+          initialRouteName="OrderTracking"
           screenOptions={{
             headerShown: false,
           }}
@@ -35,7 +35,14 @@ export default function App() {
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
           <Stack.Screen name="BrowseRetailer" component={BrowseRetailer} />
           <Stack.Screen name="ProfileRetailer" component={ProfileRetailer} />
-          <Stack.Screen name="OrderTracking" component={OrderTracking} />
+          <Stack.Screen
+            name="OrderTracking"
+            component={OrderTracking}
+            options={{
+              headerShown: true,
+              title: "Order tracking",
+            }}
+          />
           <Stack.Screen
             name="ChangePassword"
             component={ChangePassword}
