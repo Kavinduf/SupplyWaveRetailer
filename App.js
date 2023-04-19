@@ -17,6 +17,9 @@ import ProfileRetailer from "./screens/ProfileRetailer";
 import EditProfileRetailer from "./screens/EditProfileRetailer";
 import ChangePassword from "./screens/ChangePassword";
 import OrderTracking from "./screens/OrderTracking";
+import OrderConfirmation from "./screens/OrderConfirmation";
+import DeliveryStore from "./screens/DeliveryStore";
+import AddNewShop from "./screens/AddNewShop";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -25,7 +28,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="OrderTracking"
+          initialRouteName="AddNewShop"
           screenOptions={{
             headerShown: false,
           }}
@@ -35,6 +38,30 @@ export default function App() {
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
           <Stack.Screen name="BrowseRetailer" component={BrowseRetailer} />
           <Stack.Screen name="ProfileRetailer" component={ProfileRetailer} />
+          <Stack.Screen
+            name="AddNewShop"
+            component={AddNewShop}
+            options={{
+              headerShown: true,
+              title: "Add new shop",
+            }}
+          />
+          <Stack.Screen
+            name="DeliveryStore"
+            component={DeliveryStore}
+            options={{
+              headerShown: true,
+              title: "Delivery store",
+            }}
+          />
+          <Stack.Screen
+            name="OrderConfirmation"
+            component={OrderConfirmation}
+            options={{
+              headerShown: true,
+              title: "Order Confirmation",
+            }}
+          />
           <Stack.Screen
             name="OrderTracking"
             component={OrderTracking}
