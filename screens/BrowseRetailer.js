@@ -8,130 +8,72 @@ import {
   Image,
   TabView,
 } from "@rneui/base";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import CatergoryCard from "../Components/CategoryCard";
+import DropDown from "../Components/DropDown";
+import SelectButtons from "../Components/SelectButtons";
 
 // tab Categories start
 
 function CategoriesScreen() {
-  const [open, setOpen] = useState(false);
+  const optionsNew = {
+    Beverages: ["Beverage1", "Beverage2"],
+    Food: ["Food1", "Food1"],
+  };
+  const [open, setOpen] = useState({});
+  const [categories, setCategories] = useState([99, 5, 4, 3, 2, 1]);
   const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ]);
+
+  // console.log(Object.keys(optionsNew));
+
+  // const [options, setOptions] = useState(["Beverages", "Food", "safaas"]);
+  const [options, setOptions] = useState(Object.keys(optionsNew));
+
+  const [selectedType, setSelectType] = useState(null);
+
+  const [subOptions, setSubOptions] = useState(null);
+
+  const [selectedSubType, SetSelectSubType] = useState(null);
+
+  useEffect(() => {
+    if (!selectedType) return;
+    // console.log(selectedType);
+    // const option = Object.keys(optionsNew)[selectedType];
+    // console.log(Object.keys(optionsNew)[selectedType]);
+    // console.log(optionsNew[option]);
+    // setSubOptions(() => [...optionsNew[option]]);
+  }, [selectedType]);
+  // const [items, setItems] = useState([
+  //   { label: "Apple", value: "apple" },
+  //   { label: "Banana", value: "banana" },
+  // ]);
   return (
-    <View style={{ marginHorizontal: 10, marginTop: 20 }}>
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Beverages"
-        categorySelectable={true}
-        dropDownContainerStyle={{
-          backgroundColor: "#FFF",
-          marginTop: 10,
-        }}
-        // listParentContainerStyle={{
-        //   borderColor: "#FFF",
-        // }}
-        // listChildContainerStyle={{
-        //   borderColor: "#FFF",
-        // }}
-        // listParentLabelStyle={{
-        //   fontWeight: "bold",
-        //   fontSize: 15,
-        // }}
-        // listChildLabelStyle={{
-        //   fontWeight: "300",
-        // }}
+    <View style={{ marginHorizontal: 20, marginTop: 20, gap: 20 }}>
+      {/* <View>
+        <Text style={{ fontSize: 17, fontWeight: "600" }}>Type</Text>
+      </View> */}
+      <SelectButtons
+        options={options}
+        selectedOption={selectedType}
+        setSelectedOption={setSelectType}
       />
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Buiscuits"
-        categorySelectable={true}
-        dropDownContainerStyle={{
-          backgroundColor: "#FFF",
-          marginTop: 10,
-        }}
-      />
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Buiscuits"
-        categorySelectable={true}
-        dropDownContainerStyle={{
-          backgroundColor: "#FFF",
-          marginTop: 10,
-        }}
-      />
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Buiscuits"
-        categorySelectable={true}
-        dropDownContainerStyle={{
-          backgroundColor: "#FFF",
-          marginTop: 10,
-        }}
-      />
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Buiscuits"
-        categorySelectable={true}
-        dropDownContainerStyle={{
-          backgroundColor: "#FFF",
-          marginTop: 10,
-        }}
-      />
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Buiscuits"
-        categorySelectable={true}
-        dropDownContainerStyle={{
-          backgroundColor: "#FFF",
-          marginTop: 10,
-        }}
-      />
-      <DropDownPicker
-        open={open}
-        value={value}
-        items={items}
-        setOpen={setOpen}
-        setValue={setValue}
-        setItems={setItems}
-        placeholder="Buiscuits"
-        categorySelectable={true}
-      />
+      {subOptions && (
+        <>
+          <View>
+            <Text style={{ fontSize: 17, fontWeight: "600" }}>
+              Sub Categories
+            </Text>
+          </View>
+          <SelectButtons
+            options={subOptions}
+            selectedOption={selectedSubType}
+            setSelectedOption={SetSelectSubType}
+          />
+        </>
+      )}
     </View>
   );
 }

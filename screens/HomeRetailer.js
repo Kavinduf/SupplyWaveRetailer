@@ -10,6 +10,7 @@ import { color, Icon, SearchBar, Button, Card, Image } from "@rneui/base";
 import { AntDesign, FontAwesome5 } from "@expo/vector-icons";
 import React, { useState, TouchableOpacity } from "react";
 import ItemCard from "../Components/ItemCard";
+//
 
 const HomeRetailer = () => {
   const [search, setSearch] = useState("");

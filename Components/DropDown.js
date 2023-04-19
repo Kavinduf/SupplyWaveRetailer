@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, View } from "react-native";
 import { Button, Card, Image } from "@rneui/themed";
 import DropDownPicker from "react-native-dropdown-picker";
+import { Text } from "react-native";
+import { useState } from "react";
+// import DropDownPicker from "react-native-dropdown-picker";
 
-const DropDown = ({ title }) => {
+const DropDown = ({ title, index }) => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([
@@ -11,33 +13,26 @@ const DropDown = ({ title }) => {
     { label: "Banana", value: "banana" },
   ]);
   return (
-    <DropDownPicker
-      open={open}
-      value={value}
-      items={items}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
-      placeholder={title}
-      categorySelectable={true}
-      dropDownContainerStyle={{
-        backgroundColor: "#FFF",
-        marginTop: 10,
+    <View
+      style={{
+        zIndex: index,
       }}
-      // listParentContainerStyle={{
-      //   borderColor: "#FFF",
-      // }}
-      // listChildContainerStyle={{
-      //   borderColor: "#FFF",
-      // }}
-      // listParentLabelStyle={{
-      //   fontWeight: "bold",
-      //   fontSize: 15,
-      // }}
-      // listChildLabelStyle={{
-      //   fontWeight: "300",
-      // }}
-    />
+    >
+      <DropDownPicker
+        open={open}
+        value={value}
+        items={items}
+        setOpen={setOpen}
+        setValue={setValue}
+        // setItems={setItems}
+        // placeholder={title}
+        categorySelectable={true}
+        dropDownContainerStyle={{
+          backgroundColor: "#FFF",
+          marginTop: 10,
+        }}
+      />
+    </View>
   );
 };
 export default DropDown;
