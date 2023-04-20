@@ -1,13 +1,22 @@
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import React, { useState } from "react";
 import { Image, Input } from "@rneui/themed";
 import { Feather } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import GreenButton from "../Components/GreenButton";
 
-const EditProfileRetailer = () => {
+const EditProfileRetailer = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.TopView}>
-        <Text style={styles.heading}>Account Info</Text>
+        {/* <Text style={styles.heading}>Account Info</Text> */}
         <View style={{ alignSelf: "center" }}>
           <Image
             style={styles.image}
@@ -20,32 +29,14 @@ const EditProfileRetailer = () => {
         </View>
         <Text style={styles.basic}>Basic Info</Text>
         <View>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "500",
-              marginTop: 10,
-              paddingLeft: 10,
-            }}
-          >
-            Name
-          </Text>
+          <Text style={styles.text}>Name</Text>
           <Input
             textContentType="name"
             selectionColor="#2A8B00"
             placeholder="Kavindu Fernando"
             style={{ fontSize: 16 }}
           />
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "500",
-              marginTop: 10,
-              paddingLeft: 10,
-            }}
-          >
-            Phone number
-          </Text>
+          <Text style={styles.text}>Phone number</Text>
           <Input
             textContentType="telephoneNumber"
             selectionColor="#2A8B00"
@@ -54,7 +45,18 @@ const EditProfileRetailer = () => {
             style={{ fontSize: 16 }}
           />
         </View>
-        <Text
+      </View>
+      <Pressable
+        style={styles.changePassword}
+        onPress={() => navigation.navigate("ChangePassword")}
+      >
+        <Text style={styles.ChangePasswordText}>Change password</Text>
+        <AntDesign name="right" size={18} color="black" />
+      </Pressable>
+      <View style={styles.button}>
+        <GreenButton title={"Save"} />
+      </View>
+      {/* <Text
           style={{
             fontSize: 16,
             fontWeight: "500",
@@ -70,8 +72,7 @@ const EditProfileRetailer = () => {
           placeholder="••••••••••"
           secureTextEntry={true}
           style={{ fontSize: 16 }}
-        />
-      </View>
+        /> */}
     </SafeAreaView>
   );
 };
@@ -81,23 +82,23 @@ export default EditProfileRetailer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 10,
-    backgroundColor: "#FFF",
+    marginTop: StatusBar.currentHeight || 15,
+    backgroundColor: "#F5F5F5",
   },
   TopView: {
     justifyContent: "space-between",
     padding: 10,
-    // marginHorizontal: 10,
-
-    // borderRadius: 10,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 1,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 2.5,
-    // elevation: 1,
+    marginHorizontal: 15,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 1,
   },
   heading: {
     fontSize: 24,
@@ -115,10 +116,42 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   editImageText: { fontSize: 15, fontWeight: "500", marginEnd: 3 },
+  text: {
+    fontSize: 16,
+    fontWeight: "500",
+    marginTop: 10,
+    paddingLeft: 10,
+  },
   basic: {
     fontSize: 20,
     padding: 10,
     fontWeight: "700",
     marginTop: 10,
+  },
+  changePassword: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    padding: 15,
+    marginHorizontal: 15,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    marginTop: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 1,
+  },
+  ChangePasswordText: {
+    fontSize: 16,
+    fontWeight: "500",
+    paddingLeft: 10,
+  },
+  button: {
+    marginHorizontal: 15,
+    marginTop: 30,
   },
 });
