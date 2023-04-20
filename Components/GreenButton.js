@@ -4,17 +4,15 @@ import { Button } from "@rneui/themed";
 
 const GreenButton = ({ onClick, title }) => {
   return (
-    <View>
-      <Button
-        color={"#BDE4B8"}
-        radius={7}
-        raised
-        onPress={onClick}
-        title={title}
-        titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
-        buttonStyle={{ height: 50 }}
-      />
-    </View>
+    <Button
+      color={"#BDE4B8"}
+      radius={7}
+      raised
+      onPress={onClick}
+      title={title}
+      titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
+      buttonStyle={{ height: 50 }}
+    />
   );
 };
 

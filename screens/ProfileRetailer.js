@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import React, { useState } from "react";
 import { Image } from "@rneui/themed";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -8,7 +15,7 @@ import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 
-const ProfileRetailer = () => {
+const ProfileRetailer = ({ navigation }) => {
   return (
     <SafeAreaView styles={styles.container}>
       <View style={styles.TopView}>
@@ -66,37 +73,20 @@ const ProfileRetailer = () => {
         </View>
       </View>
       <View style={styles.bottomView}>
-        <View
+        <Pressable
           style={{ flexDirection: "row", paddingStart: 5, marginTop: 15 }}
-          onClick={() => {
-            navigation.navigate("EditProfileRetailer");
-          }}
+          onPress={() => navigation.navigate("EditProfileRetailer")}
         >
           <MaterialCommunityIcons name="account" size={24} color="black" />
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: 16,
-              alignSelf: "center",
-              marginStart: 20,
-            }}
-          >
-            Profile
-          </Text>
-        </View>
-        <View style={{ flexDirection: "row", paddingStart: 7, marginTop: 40 }}>
+          <Text style={styles.text}>Profile</Text>
+        </Pressable>
+        <Pressable
+          style={{ flexDirection: "row", paddingStart: 7, marginTop: 40 }}
+          onPress={() => navigation.navigate("DeliveryStore")}
+        >
           <Fontisto name="shopping-store" size={17} color="black" />
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: 16,
-              alignSelf: "center",
-              marginStart: 20,
-            }}
-          >
-            Shops
-          </Text>
-        </View>
+          <Text style={styles.text}>Shops</Text>
+        </Pressable>
         <View style={{ flexDirection: "row", paddingStart: 9, marginTop: 40 }}>
           <FontAwesome5 name="clipboard-list" size={20} color="black" />
           <Text
@@ -112,28 +102,32 @@ const ProfileRetailer = () => {
         </View>
         <View style={{ flexDirection: "row", paddingStart: 8, marginTop: 40 }}>
           <FontAwesome name="envelope" size={18} color="black" />
-          <Text
-            style={{
-              fontWeight: "600",
-              fontSize: 16,
-              alignSelf: "center",
-              marginStart: 20,
-            }}
-          >
-            Messeges
-          </Text>
+          <Text style={styles.text}>Messeges</Text>
         </View>
         <View style={{ flexDirection: "row", paddingStart: 8, marginTop: 40 }}>
           <Ionicons name="ios-settings-sharp" size={20} color="black" />
+          <Text style={styles.text}>Settings</Text>
+        </View>
+      </View>
+      <View style={styles.logout}>
+        <View
+          style={{
+            flexDirection: "row",
+            marginTop: 10,
+            justifyContent: "center",
+          }}
+        >
+          <MaterialCommunityIcons name="logout" size={22} color="#2A8B00" />
           <Text
             style={{
               fontWeight: "600",
               fontSize: 16,
               alignSelf: "center",
-              marginStart: 20,
+              marginStart: 5,
+              color: "#2A8B00",
             }}
           >
-            Settings
+            Logout
           </Text>
         </View>
       </View>
@@ -179,7 +173,30 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2.5,
     elevation: 1,
-    marginTop: 10,
+    marginTop: 15,
     paddingBottom: 20,
+  },
+  logout: {
+    justifyContent: "space-between",
+    padding: 10,
+    marginHorizontal: 10,
+    backgroundColor: "#FFF",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 1,
+    paddingBottom: 20,
+    marginTop: 15,
+  },
+  text: {
+    fontWeight: "600",
+    fontSize: 16,
+    alignSelf: "center",
+    marginStart: 20,
   },
 });

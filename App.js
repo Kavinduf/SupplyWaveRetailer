@@ -28,7 +28,7 @@ export default function App() {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="AddNewShop"
+          initialRouteName="ProfileRetailer"
           screenOptions={{
             headerShown: false,
           }}
@@ -38,6 +38,7 @@ export default function App() {
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
           <Stack.Screen name="BrowseRetailer" component={BrowseRetailer} />
           <Stack.Screen name="ProfileRetailer" component={ProfileRetailer} />
+
           <Stack.Screen
             name="AddNewShop"
             component={AddNewShop}
