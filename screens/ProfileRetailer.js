@@ -22,6 +22,7 @@ const ProfileRetailer = ({ navigation }) => {
   const onLogout = async () => {
     await logout();
     navigation.navigate("Login");
+    return;
   };
 
   return (
@@ -36,7 +37,7 @@ const ProfileRetailer = ({ navigation }) => {
             width: 220,
           }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>{user.name}</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>{user?.name}</Text>
           <Text
             style={{
               fontWeight: "600",
@@ -45,7 +46,7 @@ const ProfileRetailer = ({ navigation }) => {
               marginTop: 5,
             }}
           >
-            {user.mobileNumber}
+            {user?.mobileNumber}
           </Text>
           <Text
             style={{
@@ -55,7 +56,7 @@ const ProfileRetailer = ({ navigation }) => {
               marginTop: 5,
             }}
           >
-            {user.email}
+            {user?.email}
           </Text>
           {/* <View
             style={{
@@ -157,10 +158,11 @@ export default ProfileRetailer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 30,
+    marginTop: 30,
     backgroundColor: "black",
   },
   TopView: {
+    marginTop: StatusBar.currentHeight || 30,
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 10,

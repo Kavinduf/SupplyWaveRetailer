@@ -71,7 +71,7 @@ const AppProvider = ({ children }) => {
       );
 
       await AsyncStorage.setItem("user", JSON.stringify(userData.data()));
-      dispatch({ type: SET_USER, payload: user });
+      dispatch({ type: SET_USER, payload: userData.data() });
     } catch (e) {
       Alert.alert("Error", e.message);
     }

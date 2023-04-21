@@ -20,17 +20,21 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { Button, Dialog } from "@rneui/themed";
+import { useAppContext } from "../context/appContext";
 
 const DeliveryStore = ({ navigation }) => {
   const [stores, setStores] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selected, setSelected] = useState(1);
+  const { user } = useAppContext();
 
   const init = async () => {
     console.log("store");
     const data = [];
     setIsLoading(true);
-    const docRef = await getDocs(collection(db, "shops"));
+    const docRef = await getDocs(
+      collection(db, "retailers", user.uid, "shops")
+    );
     docRef.forEach((doc) => {
       data.push({ ...doc.data(), id: doc.id });
     });
@@ -38,17 +42,21 @@ const DeliveryStore = ({ navigation }) => {
     setStores(data);
   };
   useEffect(() => {
-    init();
+    const unsubscribe = navigation.addListener("focus", () => {
+      init();
+    });
+
+    return unsubscribe;
   }, [navigation]);
 
   const onSelect = async (id) => {
     setIsLoading(true);
     stores.forEach(async (store) => {
-      await updateDoc(doc(db, "shops", store.id), {
+      await updateDoc(doc(db, "retailers", user.uid, "shops", store.id), {
         selected: false,
       });
     });
-    await updateDoc(doc(db, "shops", id), {
+    await updateDoc(doc(db, "retailers", user.uid, "shops", id), {
       selected: true,
     });
     init();

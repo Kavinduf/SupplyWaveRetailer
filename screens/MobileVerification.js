@@ -12,7 +12,7 @@ export default function MobileVerification({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "position" : "height"}
       >
         {/* header section start */}
 

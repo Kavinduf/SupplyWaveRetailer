@@ -7,6 +7,7 @@ import {
   TextInput,
   Alert,
   ScrollView,
+  Platform,
 } from "react-native";
 import { db } from "../firebase";
 import React, { useState } from "react";
@@ -15,9 +16,11 @@ import GreenButton from "../Components/GreenButton";
 import { collection, doc, setDoc, addDoc, getDocs } from "firebase/firestore";
 import { KeyboardAvoidingView } from "react-native";
 import { Dialog } from "@rneui/themed";
+import { useAppContext } from "../context/appContext";
 
 const AddNewShop = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useAppContext();
   const [state, setState] = useState({
     shopName: "",
     mobileNumber: "",
@@ -42,7 +45,7 @@ const AddNewShop = () => {
     }
     const data = [];
     setIsLoading(true);
-    const shops = await getDocs(collection(db, "shops"));
+    const shops = await getDocs(collection(db, "retailers", user.uid, "shops"));
     shops.forEach((doc) => {
       data.push({ ...doc.data(), id: doc.id });
     });
@@ -50,10 +53,13 @@ const AddNewShop = () => {
     if (data && data.length <= 0) {
       selected = true;
     }
-    const docRef = await addDoc(collection(db, "shops"), {
-      ...state,
-      selected,
-    });
+    const docRef = await addDoc(
+      collection(db, "retailers", user.uid, "shops"),
+      {
+        ...state,
+        selected,
+      }
+    );
     Alert.alert("Shop Added");
     setIsLoading(false);
     setState({
@@ -79,7 +85,10 @@ const AddNewShop = () => {
         >
           <Dialog.Loading />
         </Dialog>
-        <KeyboardAvoidingView behavior="position">
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" && "position"}
+          keyboardVerticalOffset={Platform.OS === "ios" && 20}
+        >
           <View style={styles.TopView}>
             <Text style={styles.title}>Contact information</Text>
             <View style={styles.textInput}>

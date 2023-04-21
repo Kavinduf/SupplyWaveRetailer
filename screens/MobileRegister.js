@@ -14,7 +14,8 @@ export default function MobileRegister({ navigation }) {
     <SafeAreaView style={styles.container}>
       {/* header section start */}
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior={Platform.OS === "ios" ? "position" : "height"}
+        keyboardVerticalOffset={100}
       >
         <Text onPress={() => navigation.navigate("Register")}>Back</Text>
         <View style={{ alignItems: "center" }}>
