@@ -14,8 +14,16 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { useAppContext } from "../context/appContext";
 
 const ProfileRetailer = ({ navigation }) => {
+  const { logout, user } = useAppContext();
+
+  const onLogout = async () => {
+    await logout();
+    navigation.navigate("Login");
+  };
+
   return (
     <SafeAreaView styles={styles.container}>
       <View style={styles.TopView}>
@@ -28,8 +36,16 @@ const ProfileRetailer = ({ navigation }) => {
             width: 220,
           }}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-            Kavindu Fernando
+          <Text style={{ fontWeight: "bold", fontSize: 20 }}>{user.name}</Text>
+          <Text
+            style={{
+              fontWeight: "600",
+              fontSize: 15,
+              color: "grey",
+              marginTop: 5,
+            }}
+          >
+            {user.mobileNumber}
           </Text>
           <Text
             style={{
@@ -39,9 +55,9 @@ const ProfileRetailer = ({ navigation }) => {
               marginTop: 5,
             }}
           >
-            0763622407
+            {user.email}
           </Text>
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               marginTop: 10,
@@ -62,7 +78,7 @@ const ProfileRetailer = ({ navigation }) => {
               <AntDesign name="staro" size={15} color="#2A8B00" />
               <AntDesign name="staro" size={15} color="#2A8B00" />
             </View>
-          </View>
+          </View> */}
         </View>
         <View></View>
         <View>
@@ -126,6 +142,7 @@ const ProfileRetailer = ({ navigation }) => {
               marginStart: 5,
               color: "#2A8B00",
             }}
+            onPress={onLogout}
           >
             Logout
           </Text>
@@ -141,7 +158,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 30,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "black",
   },
   TopView: {
     flexDirection: "row",

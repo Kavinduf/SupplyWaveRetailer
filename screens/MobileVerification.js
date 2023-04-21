@@ -8,7 +8,7 @@ import { color } from "@rneui/base";
 import { KeyboardAvoidingView } from "react-native";
 import GreenButton from "../Components/GreenButton";
 
-export default function MobileVerification({ navigation }) {
+export default function MobileVerification({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -77,7 +77,9 @@ export default function MobileVerification({ navigation }) {
           >
             <GreenButton
               onClick={() => {
-                navigation.navigate("EnterDetailsRetailer");
+                navigation.navigate("EnterDetailsRetailer", {
+                  mobileNumber: route.params.mobileNumber,
+                });
               }}
               title={"VERIFY & CONTINUE"}
             />

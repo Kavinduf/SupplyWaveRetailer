@@ -1,57 +1,73 @@
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  SafeAreaView,
+  ScrollView,
+  Pressable,
+} from "react-native";
 import React, { useState } from "react";
-import { Image } from "@rneui/themed";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import OrderConfirmationBrandCard from "../Components/OrderConfirmationBrandCard";
 import GreenButton from "../Components/GreenButton";
 
-const OrderConfirmation = () => {
+const OrderConfirmation = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.TopView}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <FontAwesome5 name="map-marker-alt" size={19} color="#2A8B00" />
-          <View style={{ justifyContent: "center" }}>
-            <Text style={{ fontSize: 15, fontWeight: "700", marginBottom: 5 }}>
-              Delivery store
-            </Text>
-            <Text style={{ fontWeight: "400", marginBottom: 5 }}>
-              Elisha Super Store
-            </Text>
-            <Text style={{ color: "gray", marginBottom: 3 }}>0770045454</Text>
-            <Text style={{ width: 250, color: "gray", marginBottom: 3 }}>
-              9/3, Canon Jacob Mendis Mawatha, Idama, Moratuwa
-            </Text>
+      <ScrollView>
+        <Pressable
+          style={styles.TopView}
+          onPress={() => navigation.navigate("DeliveryStore")}
+        >
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <FontAwesome5 name="map-marker-alt" size={19} color="#2A8B00" />
+            <View style={{ justifyContent: "center" }}>
+              <Text
+                style={{ fontSize: 15, fontWeight: "700", marginBottom: 5 }}
+              >
+                Delivery store
+              </Text>
+              <Text style={{ fontWeight: "400", marginBottom: 5 }}>
+                Elisha Super Store
+              </Text>
+              <Text style={{ color: "gray", marginBottom: 3 }}>0770045454</Text>
+              <Text style={{ width: 250, color: "gray", marginBottom: 3 }}>
+                9/3, Canon Jacob Mendis Mawatha, Idama, Moratuwa
+              </Text>
+            </View>
+            <View style={{ justifyContent: "center" }}>
+              <MaterialIcons
+                name="keyboard-arrow-right"
+                size={24}
+                color="black"
+              />
+            </View>
           </View>
-          <View style={{ justifyContent: "center" }}>
-            <MaterialIcons
-              name="keyboard-arrow-right"
-              size={24}
-              color="black"
-            />
-          </View>
-        </View>
-      </View>
+        </Pressable>
 
-      {/* Cart items start */}
+        {/* Cart items start */}
 
-      <OrderConfirmationBrandCard
-        brand={"Maliban pvt ltd"}
-        title={"Cream Crackers 100g"}
-        pieces={25}
-        unitPrice={5000}
-        quantity={3}
-        total={15000}
-      />
-      <OrderConfirmationBrandCard
-        brand={"Maliban pvt ltd"}
-        title={"Cream Crackers 100g"}
-        pieces={25}
-        unitPrice={5000}
-        quantity={3}
-        total={15000}
-      />
+        <OrderConfirmationBrandCard
+          brand={"Maliban pvt ltd"}
+          title={"Cream Crackers 100g"}
+          pieces={25}
+          unitPrice={5000}
+          quantity={3}
+          total={15000}
+        />
+        <OrderConfirmationBrandCard
+          brand={"Maliban pvt ltd"}
+          title={"Cream Crackers 100g"}
+          pieces={25}
+          unitPrice={5000}
+          quantity={3}
+          total={15000}
+        />
+      </ScrollView>
       {/* Cart items end */}
       <View style={styles.bottomView}>
         <View

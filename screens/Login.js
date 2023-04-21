@@ -12,8 +12,43 @@ import { Image } from "@rneui/themed";
 
 import { KeyboardAvoidingView } from "react-native";
 import GreenButton from "../Components/GreenButton";
+import { auth } from "../firebase";
+import { useEffect, useState } from "react";
+import { useAppContext } from "../context/appContext";
 
 export default function Login({ navigation }) {
+  const { login, autoLogin, user } = useAppContext();
+  useEffect(() => {
+    console.log("user", user);
+    if (user) {
+      navigation.navigate("HomeRetailer");
+    }
+  }, [user]);
+
+  useEffect(() => {
+    autoLogin();
+  }, []);
+
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onLogin = async () => {
+    try {
+      await login({ email: state.email, password: state.password });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  useEffect(() => {
+    const user = auth.currentUser;
+    if (user) {
+      console.log("user is signed in");
+      navigation.navigate("HomeRetailer");
+    }
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -35,10 +70,12 @@ export default function Login({ navigation }) {
         <Text style={styles.LableAlign}>Phone Number</Text>
         <View style={{ flexDirection: "row" }}>
           <Input
-            textContentType="telephoneNumber"
+            textContentType="emailAddress"
             selectionColor="#2A8B00"
-            keyboardType="phone-pad"
-            placeholder="0761234567"
+            keyboardType="email-address"
+            placeholder="john@gmail.com"
+            value={state.email}
+            onChangeText={(text) => setState({ ...state, email: text })}
             rightIcon={{
               type: "feather",
               name: "check",
@@ -53,6 +90,8 @@ export default function Login({ navigation }) {
           <Input
             textContentType="password"
             selectionColor="#2A8B00"
+            value={state.password}
+            onChangeText={(text) => setState({ ...state, password: text })}
             placeholder="••••••••••"
             secureTextEntry={true}
             rightIcon={{
@@ -80,12 +119,7 @@ export default function Login({ navigation }) {
         {/* button */}
 
         <View style={{ marginTop: 10, marginEnd: 10, marginStart: 10 }}>
-          <GreenButton
-            onClick={() => {
-              navigation.navigate("HomeRetailer");
-            }}
-            title={"SIGN IN"}
-          />
+          <GreenButton onClick={onLogin} title={"SIGN IN"} />
         </View>
 
         {/* Text below button */}

@@ -8,6 +8,8 @@ import { KeyboardAvoidingView } from "react-native";
 import GreenButton from "../Components/GreenButton";
 
 export default function MobileRegister({ navigation }) {
+  const [value, setValue] = React.useState("");
+
   return (
     <SafeAreaView style={styles.container}>
       {/* header section start */}
@@ -50,6 +52,8 @@ export default function MobileRegister({ navigation }) {
             selectionColor="#2A8B00"
             keyboardType="phone-pad"
             placeholder="0761234567"
+            value={value}
+            onChangeText={(text) => setValue(text)}
             style={{ marginTop: 10, fontSize: 15 }}
           />
 
@@ -58,7 +62,9 @@ export default function MobileRegister({ navigation }) {
           {/* button start*/}
           <GreenButton
             onClick={() => {
-              navigation.navigate("MobileVerification");
+              navigation.navigate("MobileVerification", {
+                mobileNumber: value,
+              });
             }}
             title={"SEND OTP"}
           />

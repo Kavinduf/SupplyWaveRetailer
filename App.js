@@ -20,21 +20,67 @@ import OrderTracking from "./screens/OrderTracking";
 import OrderConfirmation from "./screens/OrderConfirmation";
 import DeliveryStore from "./screens/DeliveryStore";
 import AddNewShop from "./screens/AddNewShop";
+import { AppProvider, useAppContext } from "./context/appContext";
+import { useEffect } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
+
+  const Tab = createBottomTabNavigator();
+
+  const TabNavigator = ({ navigation }) => {
+    return (
+      <Tab.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={HomeRetailer}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Browse"
+          component={BrowseRetailer}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileRetailer}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    );
+  };
 
   const StackNavigator = () => {
     return (
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="ProfileRetailer"
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
           }}
         >
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Register" component={MobileRegister} />
+          <Stack.Screen name="HomeRetailer" component={TabNavigator} />
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
           <Stack.Screen name="BrowseRetailer" component={BrowseRetailer} />
           <Stack.Screen name="ProfileRetailer" component={ProfileRetailer} />
@@ -44,7 +90,7 @@ export default function App() {
             component={AddNewShop}
             options={{
               headerShown: true,
-              title: "Add new shop",
+              title: "Add new store",
             }}
           />
           <Stack.Screen
@@ -84,7 +130,7 @@ export default function App() {
             component={EditProfileRetailer}
             options={{
               headerShown: true,
-              title: "Account",
+              title: "Edit profile",
             }}
           />
           <Stack.Screen
@@ -100,13 +146,13 @@ export default function App() {
               title: "Shopping Cart",
             }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name="HomeRetailer"
             component={HomeRetailer}
             options={{
               headerShown: false,
             }}
-          />
+          /> */}
 
           <Stack.Screen
             name="MobileVerification"
@@ -127,7 +173,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <StackNavigator />
+      <AppProvider>
+        <StackNavigator />
+      </AppProvider>
     </View>
   );
 }

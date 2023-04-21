@@ -5,6 +5,7 @@ import {
   StatusBar,
   SafeAreaView,
   Pressable,
+  TextInput,
 } from "react-native";
 import React, { useState } from "react";
 import { Image, Input } from "@rneui/themed";
@@ -28,7 +29,67 @@ const EditProfileRetailer = ({ navigation }) => {
           </View>
         </View>
         <Text style={styles.basic}>Basic Info</Text>
-        <View>
+        <View style={styles.textInput}>
+          <TextInput
+            editable
+            // value={state.mobileNumber}
+            // onChangeText={(text) =>
+            //   setState({
+            //     ...state,
+            //     mobileNumber: text,
+            //   })
+            // }
+            textContentType="name"
+            selectionColor="#2A8B00"
+            placeholder="name*"
+            placeholderTextColor="gray"
+            // numberOfLines={4}
+            // value={value}
+            style={{ padding: 10 }}
+          />
+        </View>
+        <View style={styles.textInput}>
+          <TextInput
+            editable
+            // value={state.mobileNumber}
+            // onChangeText={(text) =>
+            //   setState({
+            //     ...state,
+            //     mobileNumber: text,
+            //   })
+            // } */}
+            textContentType="telephoneNumber"
+            selectionColor="#2A8B00"
+            keyboardType="phone-pad"
+            placeholder="Mobile number*"
+            placeholderTextColor="gray"
+            // numberOfLines={4}
+            maxLength={10}
+            // value={value}
+            style={{ padding: 10 }}
+          />
+        </View>
+        <View style={styles.textInput}>
+          <TextInput
+            editable
+            // value={state.nic}
+            // onChangeText={(text) =>
+            //   setState({
+            //     ...state,
+            //     nic: text,
+            //   })
+            // }
+            textContentType="name"
+            selectionColor="#2A8B00"
+            placeholder="NIC number*"
+            placeholderTextColor="gray"
+            // numberOfLines={4}
+            maxLength={13}
+            // value={value}
+            style={{ padding: 10 }}
+          />
+        </View>
+        {/* <View>
           <Text style={styles.text}>Name</Text>
           <Input
             textContentType="name"
@@ -44,7 +105,7 @@ const EditProfileRetailer = ({ navigation }) => {
             placeholder="0761234567"
             style={{ fontSize: 16 }}
           />
-        </View>
+        </View> */}
       </View>
       <Pressable
         style={styles.changePassword}
@@ -87,7 +148,8 @@ const styles = StyleSheet.create({
   },
   TopView: {
     justifyContent: "space-between",
-    padding: 10,
+    padding: 15,
+    paddingBottom: 15,
     marginHorizontal: 15,
     backgroundColor: "#FFF",
     borderRadius: 10,
@@ -123,7 +185,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   basic: {
-    fontSize: 20,
+    fontSize: 19,
     padding: 10,
     fontWeight: "700",
     marginTop: 10,
@@ -153,5 +215,13 @@ const styles = StyleSheet.create({
   button: {
     marginHorizontal: 15,
     marginTop: 30,
+  },
+  textInput: {
+    // backgroundColor: value,
+    borderColor: "#bcbcbc",
+    borderWidth: 1,
+    padding: 5,
+    marginTop: 15,
+    borderRadius: 10,
   },
 });
