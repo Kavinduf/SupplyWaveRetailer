@@ -67,20 +67,20 @@ export default function Login({ navigation }) {
 
         {/* input fields */}
 
-        <Text style={styles.LableAlign}>Phone Number</Text>
+        <Text style={styles.LableAlign}>Email</Text>
         <View style={{ flexDirection: "row" }}>
           <Input
             textContentType="emailAddress"
             selectionColor="#2A8B00"
             keyboardType="email-address"
-            placeholder="john@gmail.com"
+            placeholder="kavindu@gmail.com"
             value={state.email}
             onChangeText={(text) => setState({ ...state, email: text })}
-            rightIcon={{
-              type: "feather",
-              name: "check",
-              size: 18,
-            }}
+            // rightIcon={{
+            //   type: "feather",
+            //   name: "check",
+            //   size: 18,
+            // }}
             style={{ fontSize: 15 }}
           />
         </View>
@@ -94,11 +94,11 @@ export default function Login({ navigation }) {
             onChangeText={(text) => setState({ ...state, password: text })}
             placeholder="••••••••••"
             secureTextEntry={true}
-            rightIcon={{
-              type: "feather",
-              name: "eye-off",
-              size: 18,
-            }}
+            // rightIcon={{
+            //   type: "feather",
+            //   name: "eye-off",
+            //   size: 18,
+            // }}
             style={{ fontSize: 15 }}
           />
         </View>

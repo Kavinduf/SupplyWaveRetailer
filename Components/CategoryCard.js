@@ -1,26 +1,64 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import React, { memo } from "react";
 import { Button, Card, Image } from "@rneui/themed";
 
-const CatergoryCard = ({ image, title }) => {
+const CategoryCard = ({
+  image,
+  title,
+  navigation,
+  id,
+  mobileNumber,
+  city,
+  address,
+  shopName,
+}) => {
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={styles.card}
+      onPress={() =>
+        navigation.navigate("BrandDetails", {
+          brand: {
+            title: title,
+            image: image,
+            id,
+            mobileNumber,
+            city,
+            address,
+            shopName,
+          },
+        })
+      }
+    >
       <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <Image style={styles.image} source={image} />
+        {image && (
+          <Image
+            style={styles.image}
+            source={{
+              uri: image,
+            }}
+          />
+        )}
+        {!image && (
+          <Image
+            style={styles.image}
+            source={require("../assets/login-png.png")}
+          />
+        )}
       </View>
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
-export default CatergoryCard;
+export default memo(CategoryCard);
 
 const styles = StyleSheet.create({
   card: {
     width: "48%",
-    height: 140,
+    marginHorizontal: "1%",
+    height: 170,
     borderRadius: 10,
     backgroundColor: "#F5F5F5",
     shadowColor: "#000",

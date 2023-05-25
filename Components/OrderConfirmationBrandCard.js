@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { useState } from "react";
-import { FontAwesome5 } from "@expo/vector-icons";
-import OrderConfirmationItemCard from "../screens/OrderConfirmationItemCard";
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { useState } from 'react';
+import { FontAwesome5 } from '@expo/vector-icons';
+import OrderConfirmationItemCard from '../screens/OrderConfirmationItemCard';
 const OrderConfirmationBrandCard = ({
   brand,
   title,
@@ -10,36 +10,36 @@ const OrderConfirmationBrandCard = ({
   unitPrice,
   quantity,
   total,
+  items,
 }) => {
   return (
     <View style={styles.cartItem}>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: 'row' }}>
         <FontAwesome5
-          name="store"
+          name='store'
           size={15}
-          color="#2A8B00"
+          color='#2A8B00'
           style={{ marginTop: 2 }}
         />
-        <View style={{ justifyContent: "center" }}>
+        <View style={{ justifyContent: 'center' }}>
           <Text style={styles.brand}>{brand}</Text>
         </View>
       </View>
       <View style={styles.divider}></View>
 
       {/* Item start */}
-      <OrderConfirmationItemCard
-        title={title}
-        unitPrice={unitPrice}
-        quantity={quantity}
-        total={total}
+      <FlatList
+        data={items}
+        keyExtractor={(item, index) => index}
+        renderItem={({ item }) => (
+          <OrderConfirmationItemCard
+            title={item.title}
+            unitPrice={item.price}
+            quantity={item.qty}
+            total={item.price * item.qty}
+          />
+        )}
       />
-      <OrderConfirmationItemCard
-        title={title}
-        unitPrice={unitPrice}
-        quantity={quantity}
-        total={total}
-      />
-      {/* Item end */}
     </View>
   );
 };
@@ -48,13 +48,13 @@ export default OrderConfirmationBrandCard;
 
 const styles = StyleSheet.create({
   cartItem: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     padding: 15,
     marginHorizontal: 15,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderRadius: 10,
     marginTop: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 1,
       height: 1,
@@ -65,13 +65,13 @@ const styles = StyleSheet.create({
   },
   brand: {
     fontSize: 17,
-    fontWeight: "600",
+    fontWeight: '600',
     marginBottom: 10,
     marginStart: 10,
   },
   divider: {
     borderWidth: 1,
-    borderColor: "#f2f2f2",
+    borderColor: '#f2f2f2',
     marginBottom: 5,
   },
 });

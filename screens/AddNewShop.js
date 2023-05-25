@@ -13,22 +13,31 @@ import { db } from "../firebase";
 import React, { useState } from "react";
 // import DropDown from "../Components/DropDown";
 import GreenButton from "../Components/GreenButton";
-import { collection, doc, setDoc, addDoc, getDocs } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  setDoc,
+  addDoc,
+  getDocs,
+  updateDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import { KeyboardAvoidingView } from "react-native";
 import { Dialog } from "@rneui/themed";
 import { useAppContext } from "../context/appContext";
 
-const AddNewShop = () => {
+const AddNewShop = ({ route }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useAppContext();
   const [state, setState] = useState({
-    shopName: "",
-    mobileNumber: "",
-    address: "",
-    province: "",
-    city: "",
-    zipCode: "",
-    selected: false,
+    shopName: route.params?.item?.shopName || "",
+    mobileNumber: route.params?.item?.mobileNumber || "",
+    address: route.params?.item?.address || "",
+    province: route.params?.item?.province || "",
+    city: route.params?.item?.city || "",
+    zipCode: route.params?.item?.zipCode || "",
+    selected: route.params?.item?.selected || false,
   });
 
   const onAdd = async () => {
@@ -70,6 +79,30 @@ const AddNewShop = () => {
       city: "",
       zipCode: "",
     });
+  };
+
+  const onEdit = async () => {
+    if (
+      state.name === "" ||
+      state.mobileNumber === "" ||
+      state.address === "" ||
+      state.province === "" ||
+      state.city === "" ||
+      state.zipCode === ""
+    ) {
+      Alert.alert("Please fill all fields");
+      return;
+    }
+    console.log(route.params.item.id);
+    setIsLoading(true);
+    await updateDoc(
+      doc(db, "retailers", user.uid, "shops", route.params.item.id),
+      {
+        ...state,
+      }
+    );
+    Alert.alert("Shop Updated");
+    setIsLoading(false);
   };
 
   return (
@@ -210,9 +243,16 @@ const AddNewShop = () => {
               />
             </View>
           </View>
-          <View style={styles.button}>
-            <GreenButton title={"Add shop"} onClick={onAdd} />
-          </View>
+          {!route?.params?.item && (
+            <View style={styles.button}>
+              <GreenButton title={"Add shop"} onClick={onAdd} />
+            </View>
+          )}
+          {route?.params?.item && (
+            <View style={styles.button}>
+              <GreenButton title={"Edit shop"} onClick={onEdit} />
+            </View>
+          )}
         </KeyboardAvoidingView>
       </ScrollView>
     </SafeAreaView>

@@ -6,10 +6,10 @@ import {
   SafeAreaView,
   FlatList,
   ActivityIndicator,
-} from "react-native";
-import React, { useEffect, useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
-import GreenButton from "../Components/GreenButton";
+} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import GreenButton from '../Components/GreenButton';
 import {
   collection,
   doc,
@@ -17,10 +17,10 @@ import {
   getDocs,
   setDoc,
   updateDoc,
-} from "firebase/firestore";
-import { db } from "../firebase";
-import { Button, Dialog } from "@rneui/themed";
-import { useAppContext } from "../context/appContext";
+} from 'firebase/firestore';
+import { db } from '../firebase';
+import { Button, Dialog } from '@rneui/themed';
+import { useAppContext } from '../context/appContext';
 
 const DeliveryStore = ({ navigation }) => {
   const [stores, setStores] = useState([]);
@@ -29,11 +29,11 @@ const DeliveryStore = ({ navigation }) => {
   const { user } = useAppContext();
 
   const init = async () => {
-    console.log("store");
+    console.log('store');
     const data = [];
     setIsLoading(true);
     const docRef = await getDocs(
-      collection(db, "retailers", user.uid, "shops")
+      collection(db, 'retailers', user.uid, 'shops')
     );
     docRef.forEach((doc) => {
       data.push({ ...doc.data(), id: doc.id });
@@ -42,7 +42,7 @@ const DeliveryStore = ({ navigation }) => {
     setStores(data);
   };
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
+    const unsubscribe = navigation.addListener('focus', () => {
       init();
     });
 
@@ -52,11 +52,11 @@ const DeliveryStore = ({ navigation }) => {
   const onSelect = async (id) => {
     setIsLoading(true);
     stores.forEach(async (store) => {
-      await updateDoc(doc(db, "retailers", user.uid, "shops", store.id), {
+      await updateDoc(doc(db, 'retailers', user.uid, 'shops', store.id), {
         selected: false,
       });
     });
-    await updateDoc(doc(db, "retailers", user.uid, "shops", id), {
+    await updateDoc(doc(db, 'retailers', user.uid, 'shops', id), {
       selected: true,
     });
     init();
@@ -66,7 +66,6 @@ const DeliveryStore = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Dialog
         isVisible={isLoading}
-        sty
         overlayStyle={{
           width: 90,
           height: 90,
@@ -80,42 +79,51 @@ const DeliveryStore = ({ navigation }) => {
         renderItem={({ item }) => (
           <View style={styles.TopView}>
             <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
+              style={{ flexDirection: 'row', justifyContent: 'space-between' }}
             >
               {!item.selected && (
                 <Ionicons
                   onPress={() => onSelect(item.id)}
-                  name="radio-button-off"
+                  name='radio-button-off'
                   size={25}
-                  color="#2A8B00"
-                  style={{ alignSelf: "center" }}
+                  color='#2A8B00'
+                  style={{ alignSelf: 'center' }}
                 />
               )}
               {item.selected && (
                 <Ionicons
-                  name="radio-button-on"
+                  name='radio-button-on'
                   size={25}
-                  color="#2A8B00"
-                  style={{ alignSelf: "center" }}
+                  color='#2A8B00'
+                  style={{ alignSelf: 'center' }}
                 />
               )}
-              <View style={{ justifyContent: "center" }}>
-                <Text style={{ fontWeight: "700", marginBottom: 5 }}>
+              <View style={{ justifyContent: 'center' }}>
+                <Text style={{ fontWeight: '700', marginBottom: 5 }}>
                   {item.shopName}
                 </Text>
-                <Text style={{ color: "gray", marginBottom: 3 }}>
+                <Text style={{ color: 'gray', marginBottom: 3 }}>
                   {item.mobileNumber}
                 </Text>
-                <Text style={{ width: 260, color: "gray", marginBottom: 3 }}>
+                <Text style={{ width: 260, color: 'gray', marginBottom: 3 }}>
                   {item.address}
                 </Text>
-                <Text style={{ width: 260, color: "gray", marginBottom: 3 }}>
+                <Text style={{ width: 260, color: 'gray', marginBottom: 3 }}>
                   {item.province}
                 </Text>
-                <Text style={{ width: 260, color: "gray", marginBottom: 3 }}>
+                <Text style={{ width: 260, color: 'gray', marginBottom: 3 }}>
                   {item.city}
                 </Text>
-                <Text style={{ color: "#2A8B00", marginTop: 5 }}>Edit</Text>
+                <Text
+                  style={{ color: '#2A8B00', marginTop: 5 }}
+                  onPress={() =>
+                    navigation.navigate('AddNewShop', {
+                      item: item,
+                    })
+                  }
+                >
+                  Edit
+                </Text>
               </View>
             </View>
           </View>
@@ -123,8 +131,8 @@ const DeliveryStore = ({ navigation }) => {
       />
       <View style={{ marginHorizontal: 15, marginTop: 15 }}>
         <GreenButton
-          title={"Add new"}
-          onClick={() => navigation.navigate("AddNewShop")}
+          title={'Add new'}
+          onClick={() => navigation.navigate('AddNewShop')}
         />
       </View>
 
@@ -139,15 +147,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 15,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: '#F5F5F5',
   },
   TopView: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     padding: 15,
     marginHorizontal: 15,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     marginTop: 15,
     shadowOffset: {
       width: 1,

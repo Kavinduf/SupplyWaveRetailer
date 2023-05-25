@@ -1,11 +1,36 @@
-import { StyleSheet, Text, View, StatusBar, SafeAreaView } from "react-native";
-import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  StatusBar,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import { Image } from "@rneui/themed";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { FontAwesome5 } from "@expo/vector-icons";
+import moment from "moment";
 
-const OrderTracking = () => {
-  const [selectedStep, setSelectedStep] = useState(0);
+const OrderTracking = ({ route }) => {
+  const [selectedStep, setSelectedStep] = useState();
+  const { order } = route.params;
+
+  useEffect(() => {
+    if (order.status === "accepted") {
+      setSelectedStep(1);
+    }
+    if (order.status === "toShip") {
+      setSelectedStep(2);
+    }
+    if (order.status === "shipped") {
+      setSelectedStep(3);
+    }
+    if (order.status === "delivered") {
+      setSelectedStep(4);
+    }
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.TopView}>
@@ -24,7 +49,9 @@ const OrderTracking = () => {
               color: "#2A8B00",
             }}
           >
-            May 12
+            {moment(order.createdAt.seconds * 1000)
+              .add(5, "days")
+              .format("MMM DD")}
           </Text>
         </View>
         <View style={styles.statusBarView}>
@@ -119,9 +146,7 @@ const OrderTracking = () => {
       <View style={styles.BottomView}>
         <View style={{ flexDirection: "row" }}>
           <FontAwesome5 name="map-marker-alt" size={20} color="#2A8B00" />
-          <Text style={{ marginStart: 10 }}>
-            9/3, Canon Jacob Mendis Mawatha, Idama, Moratuwa
-          </Text>
+          <Text style={{ marginStart: 10 }}>{order.deliverStore.address}</Text>
         </View>
 
         {/* Bottom delivery discription start*/}
@@ -147,10 +172,15 @@ const OrderTracking = () => {
             <Text style={{ marginStart: 10 }}>
               Delivered to the destination
             </Text>
-            <View style={{ flexDirection: "row", marginStart: 10 }}>
-              <Text style={{ color: "gray" }}>2023-04-17 </Text>
-              <Text style={{ color: "gray", marginStart: 10 }}>20.03</Text>
-            </View>
+            {order.deliveredAt && (
+              <View style={{ flexDirection: "row", marginStart: 10 }}>
+                <Text style={{ color: "gray" }}>
+                  {moment(order.deliveredAt.seconds * 1000).format(
+                    "YYYY-MM-DD HH:mm"
+                  )}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
 
@@ -175,10 +205,15 @@ const OrderTracking = () => {
 
           <View style={{ justifyContent: "flex-end" }}>
             <Text style={{ marginStart: 10 }}>Order dispatched</Text>
-            <View style={{ flexDirection: "row", marginStart: 10 }}>
-              <Text style={{ color: "gray" }}>2023-04-17 </Text>
-              <Text style={{ color: "gray", marginStart: 10 }}>20.03</Text>
-            </View>
+            {order.shippedAt && (
+              <View style={{ flexDirection: "row", marginStart: 10 }}>
+                <Text style={{ color: "gray" }}>
+                  {moment(order.shippedAt.seconds * 1000).format(
+                    "YYYY-MM-DD HH:mm"
+                  )}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
 
@@ -203,10 +238,15 @@ const OrderTracking = () => {
 
           <View style={{ justifyContent: "flex-end" }}>
             <Text style={{ marginStart: 10 }}>Order is ready for dispatch</Text>
-            <View style={{ flexDirection: "row", marginStart: 10 }}>
-              <Text style={{ color: "gray" }}>2023-04-17 </Text>
-              <Text style={{ color: "gray", marginStart: 10 }}>20.03</Text>
-            </View>
+            {order.toShipAt && (
+              <View style={{ flexDirection: "row", marginStart: 10 }}>
+                <Text style={{ color: "gray" }}>
+                  {moment(order.toShipAt.seconds * 1000).format(
+                    "YYYY-MM-DD HH:mm"
+                  )}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
 
@@ -231,10 +271,15 @@ const OrderTracking = () => {
 
           <View style={{ justifyContent: "flex-end" }}>
             <Text style={{ marginStart: 10 }}>Order accepted</Text>
-            <View style={{ flexDirection: "row", marginStart: 10 }}>
-              <Text style={{ color: "gray" }}>2023-04-17 </Text>
-              <Text style={{ color: "gray", marginStart: 10 }}>20.03</Text>
-            </View>
+            {order.acceptedAt && (
+              <View style={{ flexDirection: "row", marginStart: 10 }}>
+                <Text style={{ color: "gray" }}>
+                  {moment(order.acceptedAt.seconds * 1000).format(
+                    "YYYY-MM-DD HH:mm"
+                  )}{" "}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
 
@@ -243,12 +288,12 @@ const OrderTracking = () => {
       {/* Bottom delivery discription end*/}
 
       {/* change the following button in order to change the bar */}
-      <TouchableOpacity
-        style={{ height: 50, width: 50, backgroundColor: "black" }}
+      {/* <Pressable
+        style={{ height: 50, width: 50, backgroundColor: 'black' }}
         onPress={() => {
           setSelectedStep(selectedStep + 1);
         }}
-      ></TouchableOpacity>
+      ></Pressable> */}
     </SafeAreaView>
   );
 };

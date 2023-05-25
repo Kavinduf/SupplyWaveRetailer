@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, SafeAreaView, StatusBar } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  StatusBar,
+  FlatList,
+  ScrollView,
+} from "react-native";
 import {
   color,
   Icon,
@@ -12,13 +20,15 @@ import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import CatergoryCard from "../Components/CategoryCard";
+import CategoryCard from "../Components/CategoryCard";
 import DropDown from "../Components/DropDown";
 import SelectButtons from "../Components/SelectButtons";
+import { db } from "../firebase";
+import { getDocs, doc, collection } from "firebase/firestore";
 
 // tab Categories start
 
-function CategoriesScreen() {
+function CategoriesScreen({ navigation }) {
   const optionsNew = {
     Beverages: ["Beverage1", "Beverage2"],
     Food: ["Food1", "Food1"],
@@ -30,51 +40,107 @@ function CategoriesScreen() {
   // console.log(Object.keys(optionsNew));
 
   // const [options, setOptions] = useState(["Beverages", "Food", "safaas"]);
-  const [options, setOptions] = useState(Object.keys(optionsNew));
+  const [options, setOptions] = useState([]);
 
   const [selectedType, setSelectType] = useState(null);
 
   const [subOptions, setSubOptions] = useState(null);
 
-  const [selectedSubType, SetSelectSubType] = useState(null);
+  const [selectedSubType, setSelectedSubType] = useState([]);
+
+  const onSearch = () => {
+    navigation.navigate("ViewCategories", {
+      selectedType: categories[selectedType],
+      selectedSubType: selectedSubType,
+    });
+  };
 
   useEffect(() => {
-    if (!selectedType) return;
-    // console.log(selectedType);
-    // const option = Object.keys(optionsNew)[selectedType];
-    // console.log(Object.keys(optionsNew)[selectedType]);
-    // console.log(optionsNew[option]);
-    // setSubOptions(() => [...optionsNew[option]]);
+    const data = [];
+    const init = async () => {
+      const categories = await getDocs(collection(db, "categories"));
+      categories.docs.forEach((doc) => {
+        data.push({ ...doc.data(), id: doc.id });
+      });
+      // console.log(data);
+      setCategories(data);
+    };
+
+    init();
+  }, []);
+
+  useEffect(() => {
+    const mappedCategories = categories.map((category) => {
+      return Object.keys(category)[0];
+    });
+    setOptions({ type: mappedCategories });
+  }, [categories]);
+
+  useEffect(() => {
+    console.log("selectedType", selectedType);
+
+    if (selectedType === null || !categories) {
+      return;
+    }
+
+    //
+    const subCategories = [];
+    setSelectedSubType([]);
+
+    const category = categories?.find((category, index) => {
+      return index === selectedType;
+    });
+
+    const values = Object.values(category)[0];
+
+    console.log("category", values);
+
+    setOptions({ ...options, subType: values });
   }, [selectedType]);
-  // const [items, setItems] = useState([
-  //   { label: "Apple", value: "apple" },
-  //   { label: "Banana", value: "banana" },
+
   // ]);
   return (
-    <View style={{ marginHorizontal: 20, marginTop: 20, gap: 20 }}>
-      {/* <View>
-        <Text style={{ fontSize: 17, fontWeight: "600" }}>Type</Text>
-      </View> */}
-      <SelectButtons
-        options={options}
-        selectedOption={selectedType}
-        setSelectedOption={setSelectType}
-      />
-      {subOptions && (
-        <>
-          <View>
-            <Text style={{ fontSize: 17, fontWeight: "600" }}>
-              Sub Categories
-            </Text>
-          </View>
+    <ScrollView>
+      <View
+        style={{
+          marginHorizontal: 20,
+          marginTop: 20,
+          gap: 20,
+          marginBottom: 15,
+        }}
+      >
+        {options?.type && options?.type.length > 0 && (
           <SelectButtons
-            options={subOptions}
-            selectedOption={selectedSubType}
-            setSelectedOption={SetSelectSubType}
+            options={options.type}
+            selectedOption={selectedType}
+            setSelectedOption={setSelectType}
           />
-        </>
-      )}
-    </View>
+        )}
+        {options?.subType && options?.subType.length > 0 && (
+          <>
+            <View>
+              <Text style={{ fontSize: 17, fontWeight: "600" }}>
+                Sub Categories
+              </Text>
+            </View>
+            <SelectButtons
+              options={options.subType}
+              selectedOption={selectedSubType}
+              setSelectedOption={setSelectedSubType}
+            />
+          </>
+        )}
+        <Button
+          title={"Search"}
+          color={"#BDE4B8"}
+          titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 19 }}
+          radius={7}
+          buttonStyle={{ height: 50 }}
+          raised
+          onPress={onSearch}
+        />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -82,8 +148,24 @@ function CategoriesScreen() {
 
 //   Tab Brands start
 
-function BrandsScreen() {
+function BrandsScreen({ navigation }) {
   const [search, setSearch] = useState("");
+  const [brands, setBrands] = useState([]);
+
+  const init = async () => {
+    const data = [];
+    const brands = await getDocs(collection(db, "manufacturers"));
+    brands.docs.forEach((doc) => {
+      data.push({ ...doc.data(), id: doc.id });
+    });
+    console.log(data);
+    setBrands(data);
+  };
+
+  useEffect(() => {
+    init();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={{ marginHorizontal: 20 }}>
@@ -117,37 +199,16 @@ function BrandsScreen() {
             justifyContent: "space-between",
           }}
         >
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
-          />
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
-          />
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
-          />
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
-          />
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
-          />
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
-          />
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
-          />
-          <CatergoryCard
-            image={require("../assets/login-png.png")}
-            title={"Buiscuits"}
+          <FlatList
+            numColumns={2}
+            data={brands}
+            renderItem={({ item }) => (
+              <CategoryCard
+                {...item}
+                title={item.shopName}
+                navigation={navigation}
+              />
+            )}
           />
         </View>
       </View>

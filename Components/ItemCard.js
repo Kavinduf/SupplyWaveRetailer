@@ -1,98 +1,184 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Button, Card, Image } from "@rneui/themed";
-import { Icon } from "@rneui/base";
-import { Feather } from "@expo/vector-icons";
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { memo } from 'react';
+import { Button, Card, Image } from '@rneui/themed';
+import { Icon } from '@rneui/base';
+import { Feather } from '@expo/vector-icons';
+import { useAppContext } from '../context/appContext';
 
-const ItemCard = ({ title, price, brand, registerPage, pieces }) => {
+const ItemCard = ({
+  productName,
+  pricePerUnit,
+  brand,
+  registerPage,
+  piecesInUnit,
+  image,
+  weight,
+  id,
+  onCartIconClicked,
+  manufacturer,
+  navigation,
+}) => {
+  if (!pricePerUnit) {
+    return null;
+  }
+  // console.log(manufacturer);
   return (
-    <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.container}>
-      {/* {registerPage && <Text>Register Page true</Text>} */}
+    // <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate('ItemDetails', {
+          item: {
+            productName,
+            pricePerUnit,
+            manufacturer,
+            id,
+            piecesInUnit,
+            image,
+            weight,
+          },
+        })
+      }
+    >
+      <View style={styles.cardWrapper}>
+        {/* {registerPage && <Text>Register Page true</Text>} */}
 
-      <Image
-        source={require("../assets/login-png.png")}
-        style={{
-          width: 100,
-          height: 100,
-        }}
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.textTitle}>{title}</Text>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.textDescriptionLeft}>Pieces :</Text>
-          <Text style={styles.textDescriptionRight}>{pieces}</Text>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.textDescriptionLeft}>Brand :</Text>
-          <Text style={styles.textDescriptionRight}>{brand}</Text>
-        </View>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <View style={{ justifyContent: "flex-end" }}>
-            <Text style={styles.textPrice}>LKR {price}</Text>
+        {!image && (
+          <Image
+            source={require('../assets/login-png.png')}
+            style={{
+              width: 100,
+              height: 100,
+            }}
+          />
+        )}
+        {image && (
+          <Image
+            source={{
+              uri: image,
+            }}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 10,
+            }}
+          />
+        )}
+        <View style={styles.textContainer}>
+          <Text style={styles.textTitle}>{productName}</Text>
+          <View style={{ flexDirection: 'row' }}>
+            <Text style={styles.textDescriptionLeft}>Pieces :</Text>
+            <Text style={styles.textDescriptionRight}>{piecesInUnit}</Text>
           </View>
-          <View style={{ justifyContent: "flex-end" }}>
-            <Feather
-              name="shopping-cart"
-              type="font-awesome"
-              color="#2A8B00"
-              size={20}
-            />
+          {manufacturer && (
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.textDescriptionLeft}>Brand :</Text>
+              <Text style={styles.textDescriptionRight}>
+                {manufacturer.shopName}
+              </Text>
+            </View>
+          )}
+
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+          >
+            <View style={{ justifyContent: 'flex-end' }}>
+              <Text style={styles.textPrice}>LKR {pricePerUnit}</Text>
+            </View>
+            <View style={{ justifyContent: 'flex-end' }}>
+              <Feather
+                name='shopping-cart'
+                type='font-awesome'
+                color='#2A8B00'
+                size={20}
+                onPress={() =>
+                  onCartIconClicked({
+                    title: productName,
+                    price: pricePerUnit,
+                    pieces: piecesInUnit,
+                    image,
+                    brand: manufacturer.shopName,
+                    brandId: manufacturer.id,
+                    brandPhoneNo: manufacturer.mobileNumber,
+                    id,
+                  })
+                }
+              />
+            </View>
           </View>
-        </View>
-        {/* <Button
+          {/* <Button
           containerStyle={{
             marginTop: 10,
           }}
           title={"Add to cart"}
         /> */}
+        </View>
       </View>
-    </Card>
+    </Pressable>
   );
 };
 
-export default ItemCard;
+export default memo(ItemCard);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
+    marginHorizontal: 15,
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 1,
       height: 1,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.2,
     shadowRadius: 2.5,
     elevation: 1,
-    marginBottom: 0,
+    marginBottom: 15,
   },
+  // TopView: {
+  //   backgroundColor: "#FFF",
+  //   // marginHorizontal: 15,
+  //   // borderRadius: 10,
+  //   shadowColor: "#000",
+  //   shadowOffset: {
+  //     width: 1,
+  //     height: 1,
+  //   },
+  //   shadowOpacity: 0.1,
+  //   shadowRadius: 2.5,
+  //   elevation: 1,
+  //   marginTop: 10,
+  // },
   cardWrapper: {
-    flexDirection: "row",
-    backgroundColor: "#FFF",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderRadius: 10,
   },
   textContainer: {
-    justifyContent: "center",
+    justifyContent: 'center',
     width: 205,
+    marginEnd: 15,
   },
   textTitle: {
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 14,
   },
   textDescriptionLeft: {
-    fontWeight: "400",
+    fontWeight: '400',
     paddingStart: 1,
     fontSize: 13,
   },
   textDescriptionRight: {
-    fontWeight: "500",
-    color: "gray",
+    fontWeight: '500',
+    color: 'gray',
     paddingStart: 5,
     fontSize: 13,
   },
   textPrice: {
     fontSize: 15,
-    fontWeight: "600",
+    fontWeight: '600',
     marginTop: 10,
   },
 });

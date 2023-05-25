@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Button } from "@rneui/themed";
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { Button } from '@rneui/themed';
 
-const GreenButton = ({ onClick, title }) => {
+const GreenButton = ({ onClick, title, containerStyle, buttonStyle }) => {
   return (
     <Button
-      color={"#BDE4B8"}
+      color={'#BDE4B8'}
       radius={7}
       raised
       onPress={onClick}
       title={title}
-      titleStyle={{ color: "#000000", fontWeight: "bold", fontSize: 17 }}
+      titleStyle={{ color: '#000000', fontWeight: 'bold', fontSize: 17 }}
       buttonStyle={{ height: 50 }}
+      containerStyle={containerStyle}
     />
   );
 };

@@ -83,10 +83,20 @@ const ProfileRetailer = ({ navigation }) => {
         </View>
         <View></View>
         <View>
-          <Image
-            style={{ width: 100, height: 100 }}
-            source={require("../assets/login-png.png")}
-          />
+          {!user?.image && (
+            <Image
+              style={{ width: 100, height: 100 }}
+              source={require("../assets/login-png.png")}
+            />
+          )}
+          {user?.image && (
+            <Image
+              style={{ width: 100, height: 100, borderRadius: 50 }}
+              source={{
+                uri: user?.image,
+              }}
+            />
+          )}
         </View>
       </View>
       <View style={styles.bottomView}>
@@ -104,7 +114,10 @@ const ProfileRetailer = ({ navigation }) => {
           <Fontisto name="shopping-store" size={17} color="black" />
           <Text style={styles.text}>Shops</Text>
         </Pressable>
-        <View style={{ flexDirection: "row", paddingStart: 9, marginTop: 40 }}>
+        <Pressable
+          style={{ flexDirection: "row", paddingStart: 9, marginTop: 40 }}
+          onPress={() => navigation.navigate("Orders")}
+        >
           <FontAwesome5 name="clipboard-list" size={20} color="black" />
           <Text
             style={{
@@ -116,15 +129,15 @@ const ProfileRetailer = ({ navigation }) => {
           >
             Orders
           </Text>
-        </View>
-        <View style={{ flexDirection: "row", paddingStart: 8, marginTop: 40 }}>
+        </Pressable>
+        {/* <View style={{ flexDirection: "row", paddingStart: 8, marginTop: 40 }}>
           <FontAwesome name="envelope" size={18} color="black" />
-          <Text style={styles.text}>Messeges</Text>
-        </View>
-        <View style={{ flexDirection: "row", paddingStart: 8, marginTop: 40 }}>
-          <Ionicons name="ios-settings-sharp" size={20} color="black" />
+          <Text style={styles.text}>Messages</Text>
+        </View> */}
+        {/* <View style={{ flexDirection: 'row', paddingStart: 8, marginTop: 40 }}>
+          <Ionicons name='ios-settings-sharp' size={20} color='black' />
           <Text style={styles.text}>Settings</Text>
-        </View>
+        </View> */}
       </View>
       <View style={styles.logout}>
         <View

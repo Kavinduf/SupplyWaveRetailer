@@ -32,15 +32,24 @@ const styles = StyleSheet.create({
     // marginHorizontal: 10,
   },
   option: {
-    borderColor: "gray",
+    borderColor: "#2A8B00",
     borderWidth: 1,
     padding: 10,
     borderRadius: 5,
     overflow: "hidden",
     fontSize: 16,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.5,
+    elevation: 1,
+    backgroundColor: "white",
   },
   selected: {
-    backgroundColor: "black",
-    color: "#fff",
+    backgroundColor: "#BDE4B8",
+    // color: "#fff",
   },
 });

@@ -20,10 +20,18 @@ import OrderTracking from "./screens/OrderTracking";
 import OrderConfirmation from "./screens/OrderConfirmation";
 import DeliveryStore from "./screens/DeliveryStore";
 import AddNewShop from "./screens/AddNewShop";
+import Orders from "./screens/Orders";
+import OrderDetails from "./screens/OrderDetails";
+import ViewCategories from "./screens/ViewCategories";
 import { AppProvider, useAppContext } from "./context/appContext";
 import { useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  FontAwesome,
+} from "@expo/vector-icons";
+import BrandDetails from "./screens/BrandDetails";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -36,12 +44,17 @@ export default function App() {
         initialRouteName="Home"
         screenOptions={{
           headerShown: false,
+          tabBarActiveTintColor: "#2A8B00",
         }}
+        // activeColor="#2A8B00"
+        // activeBackgroundColor="#2A8B00"
+        // style={{ backgroundColor: "green" }}
       >
         <Tab.Screen
           name="Home"
           component={HomeRetailer}
           options={{
+            tabBarActiveTintColor: "#2A8B00",
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),
@@ -52,7 +65,16 @@ export default function App() {
           component={BrowseRetailer}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+              <MaterialIcons name="explore" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Cart"
+          component={ShoppingCart}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="cart" color={color} size={size} />
             ),
           }}
         />
@@ -61,7 +83,7 @@ export default function App() {
           component={ProfileRetailer}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
+              <FontAwesome name="user" color={color} size={size} />
             ),
           }}
         />
@@ -84,6 +106,22 @@ export default function App() {
           <Stack.Screen name="MobileRegister" component={MobileRegister} />
           <Stack.Screen name="BrowseRetailer" component={BrowseRetailer} />
           <Stack.Screen name="ProfileRetailer" component={ProfileRetailer} />
+          <Stack.Screen
+            name="ViewCategories"
+            component={ViewCategories}
+            options={{ headerShown: true, title: "Categories" }}
+          />
+          <Stack.Screen name="BrandDetails" component={BrandDetails} />
+          <Stack.Screen
+            name="Orders"
+            component={Orders}
+            options={{ headerShown: true, title: "Orders" }}
+          />
+          <Stack.Screen
+            name="OrderDetails"
+            component={OrderDetails}
+            options={{ headerShown: true, title: "Order Details" }}
+          />
 
           <Stack.Screen
             name="AddNewShop"
