@@ -69,7 +69,7 @@ const Stripe = ({ order, navigation, deliverStore }) => {
       defaultBillingDetails: {
         name: "Jane Doe",
       },
-      returnURL: "http://192.168.8.100:5000",
+      returnURL: "http://192.168.8.101:5000",
     });
     console.log(paymentIntentId);
     if (!error) {
@@ -78,7 +78,7 @@ const Stripe = ({ order, navigation, deliverStore }) => {
   };
 
   const fetchPaymentSheetParams = async () => {
-    const response = await fetch(`http://192.168.8.100:5000`, {
+    const response = await fetch(`http://192.168.8.101:5000`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
