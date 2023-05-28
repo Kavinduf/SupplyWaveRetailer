@@ -6,12 +6,12 @@ import {
   SafeAreaView,
   FlatList,
   Pressable,
-} from "react-native";
-import { color, Icon, SearchBar, Button, Card, Image } from "@rneui/base";
-import { AntDesign, FontAwesome5, Ionicons } from "@expo/vector-icons";
-import React, { useState, TouchableOpacity, useEffect } from "react";
-import ItemCard from "../Components/ItemCard";
-import { db } from "../firebase";
+} from 'react-native';
+import { color, Icon, SearchBar, Button, Card, Image } from '@rneui/base';
+import { AntDesign, FontAwesome5, Ionicons } from '@expo/vector-icons';
+import React, { useState, TouchableOpacity, useEffect } from 'react';
+import ItemCard from '../Components/ItemCard';
+import { db } from '../firebase';
 import {
   collection,
   getDoc,
@@ -22,16 +22,16 @@ import {
   orderBy,
   startAt,
   endAt,
-} from "firebase/firestore";
-import { useAppContext } from "../context/appContext";
-import { Dialog, Input } from "@rneui/themed";
-import { ScrollView, TextInput } from "react-native-gesture-handler";
-import BrandCard from "../Components/BrandCard";
+} from 'firebase/firestore';
+import { useAppContext } from '../context/appContext';
+import { Dialog, Input } from '@rneui/themed';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import BrandCard from '../Components/BrandCard';
 
 //
 
 const HomeRetailer = ({ navigation }) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [products, setProducts] = useState([]);
   const [qty, setQty] = useState(1);
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -46,16 +46,17 @@ const HomeRetailer = ({ navigation }) => {
   const onSearch = async () => {
     setIsLoading(true);
     const q = query(
-      collection(db, "products"),
-      orderBy("productName"),
+      collection(db, 'products'),
+      where('status', '==', 'active'),
+      orderBy('productName'),
       startAt(search),
-      endAt(search + "\uf8ff")
+      endAt(search + '\uf8ff')
     );
     const querySnapshot = await getDocs(q);
     setProducts([]);
     for (let i = 0; i < querySnapshot.size; i++) {
       const manufacturer = await getDoc(
-        doc(db, "manufacturers", querySnapshot.docs[i].data().manufacturerId)
+        doc(db, 'manufacturers', querySnapshot.docs[i].data().manufacturerId)
       );
       setProducts((prev) => [
         ...prev,
@@ -73,10 +74,14 @@ const HomeRetailer = ({ navigation }) => {
     setProducts([]);
     setBrands([]);
     setIsLoading(true);
-    const querySnapshot = await getDocs(collection(db, "products"));
+    const q = query(
+      collection(db, 'products'),
+      where('status', '==', 'active')
+    );
+    const querySnapshot = await getDocs(q);
     for (let i = 0; i < querySnapshot.size; i++) {
       const manufacturer = await getDoc(
-        doc(db, "manufacturers", querySnapshot.docs[i].data().manufacturerId)
+        doc(db, 'manufacturers', querySnapshot.docs[i].data().manufacturerId)
       );
       setProducts((prev) => [
         ...prev,
@@ -88,7 +93,7 @@ const HomeRetailer = ({ navigation }) => {
       ]);
     }
 
-    const brands = await getDocs(collection(db, "manufacturers"));
+    const brands = await getDocs(collection(db, 'manufacturers'));
     for (let i = 0; i < brands.size; i++) {
       setBrands((prev) => [
         ...prev,
@@ -99,7 +104,7 @@ const HomeRetailer = ({ navigation }) => {
       ]);
     }
 
-    const categories = await getDocs(collection(db, "categories"));
+    const categories = await getDocs(collection(db, 'categories'));
     for (let i = 0; i < categories.size; i++) {
       //laundry:[1,2,3,4] = categories.docs[i].data()
 
@@ -146,8 +151,8 @@ const HomeRetailer = ({ navigation }) => {
       </Dialog>
       <View
         style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
+          flexDirection: 'row',
+          justifyContent: 'space-between',
           marginHorizontal: 20,
           marginBottom: 20,
         }}
@@ -158,14 +163,14 @@ const HomeRetailer = ({ navigation }) => {
         >
           <View
             style={{
-              alignItems: "center",
+              alignItems: 'center',
             }}
           >
             <Text
               style={{
                 fontSize: 20,
-                fontWeight: "bold",
-                textAlign: "center",
+                fontWeight: 'bold',
+                textAlign: 'center',
               }}
             >
               {selectedProduct?.title}
@@ -174,7 +179,7 @@ const HomeRetailer = ({ navigation }) => {
               style={{
                 fontSize: 12,
                 fontWeight: 400,
-                textAlign: "center",
+                textAlign: 'center',
               }}
             >
               {selectedProduct?.brand}
@@ -192,12 +197,12 @@ const HomeRetailer = ({ navigation }) => {
             />
             <View
               style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
+                flexDirection: 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
                 marginHorizontal: 20,
                 gap: 4,
-                backgroundColor: "#EEEEEE",
+                backgroundColor: '#EEEEEE',
                 marginVertical: 15,
                 borderRadius: 40,
                 padding: 5,
@@ -206,10 +211,10 @@ const HomeRetailer = ({ navigation }) => {
               }}
             >
               <Ionicons
-                name="remove-circle-outline"
+                name='remove-circle-outline'
                 size={30}
                 onPress={() => {
-                  if (qty === "") {
+                  if (qty === '') {
                     setQty(1);
                     return;
                   }
@@ -220,27 +225,27 @@ const HomeRetailer = ({ navigation }) => {
               />
 
               <TextInput
-                placeholder="Qty"
+                placeholder='Qty'
                 value={qty.toString()}
                 onChangeText={(text) => setQty(text)}
-                keyboardType="number-pad"
+                keyboardType='number-pad'
                 input
                 style={{
                   width: 40,
                   marginVertical: 10,
                   marginHorizontal: 0,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  textAlign: 'center',
                   fontSize: 20,
-                  fontWeight: "bold",
+                  fontWeight: 'bold',
                 }}
               />
               <Ionicons
-                name="add-circle-outline"
+                name='add-circle-outline'
                 size={30}
                 onPress={() => {
-                  if (qty === "") {
+                  if (qty === '') {
                     setQty(1);
                     return;
                   }
@@ -252,18 +257,18 @@ const HomeRetailer = ({ navigation }) => {
 
             <Button
               // type="outline"
-              title={"Add to Cart"}
+              title={'Add to Cart'}
               radius={7}
               raised
               onPress={onAddToCart}
               titleStyle={{
-                color: "#000000",
-                fontWeight: "bold",
+                color: '#000000',
+                fontWeight: 'bold',
                 fontSize: 17,
               }}
               buttonStyle={{
                 // borderColor: "green",
-                backgroundColor: "#BDE4B8",
+                backgroundColor: '#BDE4B8',
                 width: 200,
               }}
             />
@@ -275,19 +280,19 @@ const HomeRetailer = ({ navigation }) => {
 
       {/* SearchBAr Start */}
       <SearchBar
-        lightTheme="true"
-        round="true"
+        lightTheme='true'
+        round='true'
         value={search}
         onChangeText={setSearch}
-        placeholder="Browse our products"
-        selectionColor="#2A8B00"
+        placeholder='Browse our products'
+        selectionColor='#2A8B00'
         // leftIconContainerStyle={{ backgroundColor: "#FFFFFF" }}
         containerStyle={styles.searchContainer}
         inputStyle={styles.searchInput}
         inputContainerStyle={styles.searchInputContainer}
-        returnKeyType="search"
-        style={{ backgroundColor: "#FFF" }}
-        searchIcon={{ color: "#2A8B00", size: 25 }}
+        returnKeyType='search'
+        style={{ backgroundColor: '#FFF' }}
+        searchIcon={{ color: '#2A8B00', size: 25 }}
         onSubmitEditing={onSearch}
         rightIcon={{}}
       ></SearchBar>
@@ -297,11 +302,11 @@ const HomeRetailer = ({ navigation }) => {
 
       <View
         style={{
-          flexDirection: "row",
+          flexDirection: 'row',
           marginTop: 25,
           marginBottom: 15,
-          justifyContent: "space-between",
-          alignItems: "center",
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         <FlatList
@@ -313,7 +318,7 @@ const HomeRetailer = ({ navigation }) => {
             <Text
               style={styles.catergories}
               onPress={() =>
-                navigation.navigate("ViewCategories", {
+                navigation.navigate('ViewCategories', {
                   selectedType: { [item]: [] },
                   selectedSubType: [],
                 })
@@ -333,13 +338,13 @@ const HomeRetailer = ({ navigation }) => {
 
       <View
         style={{
-          flexDirection: "row",
+          flexDirection: 'row',
           marginStart: 15,
           marginVertical: 10,
         }}
       >
         <Pressable style={styles.TopViewBrands}>
-          <Text style={{ fontWeight: "600", fontSize: 18, color: "#2A8B00" }}>
+          <Text style={{ fontWeight: '600', fontSize: 18, color: '#2A8B00' }}>
             Brands
           </Text>
         </Pressable>
@@ -353,7 +358,7 @@ const HomeRetailer = ({ navigation }) => {
             paddingBottom: 0,
             maxHeight: 100,
             // height: 100,
-            overflow: "hidden",
+            overflow: 'hidden',
           }}
           data={brands}
           keyExtractor={(item) => item.id}
@@ -366,7 +371,7 @@ const HomeRetailer = ({ navigation }) => {
       {/* Brand slider ends */}
 
       <View style={{ marginHorizontal: 15, marginBottom: 20, marginTop: 5 }}>
-        <Text style={{ fontSize: 18, fontWeight: "700" }}>All Products</Text>
+        <Text style={{ fontSize: 18, fontWeight: '700' }}>All Products</Text>
       </View>
       {/* Item Cards Start */}
 
@@ -402,15 +407,15 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
     // marginHorizontal: 10,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: '#F5F5F5',
   },
   cardWrapperContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     gap: 4,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   cardContainer: {
-    width: "50%",
+    width: '50%',
     marginHorizontal: 0,
   },
   searchContainer: {
@@ -418,7 +423,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 0,
     marginHorizontal: 15,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 1,
       height: 0,
@@ -432,9 +437,9 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     padding: 5,
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 1,
       height: 1,
@@ -448,11 +453,11 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     padding: 5,
-    backgroundColor: "#fff",
-    borderColor: "#2A8B00",
+    backgroundColor: '#fff',
+    borderColor: '#2A8B00',
     borderWidth: 1,
     borderRadius: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 1,
       height: 1,
@@ -461,18 +466,18 @@ const styles = StyleSheet.create({
     shadowRadius: 2.5,
     elevation: 1,
     marginEnd: 15,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   catergories: {
-    fontWeight: "600",
+    fontWeight: '600',
     marginStart: 10,
     // backgroundColor: "#BDE4B8",
-    borderColor: "#2A8B00",
+    borderColor: '#2A8B00',
     borderWidth: 1,
     padding: 5,
     borderRadius: 15,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 1,
       height: 1,
@@ -481,15 +486,15 @@ const styles = StyleSheet.create({
     shadowRadius: 2.5,
     elevation: 1,
   },
-  searchInput: { backgroundColor: "#FFF", borderRadius: 10, padding: 0 },
+  searchInput: { backgroundColor: '#FFF', borderRadius: 10, padding: 0 },
   searchInputContainer: {
-    backgroundColor: "#FFF",
+    backgroundColor: '#FFF',
     borderRadius: 10,
     paddingStart: 5,
   },
   text: {
     fontSize: 14,
-    fontWeight: "500",
-    color: "gray",
+    fontWeight: '500',
+    color: 'gray',
   },
 });
